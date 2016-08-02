@@ -1,0 +1,110 @@
+main {
+    padding-bottom: $global-padding;
+}
+
+// Styles for the setup widgets.
+.module,
+.block__add,
+[class^="block__actions--"] {
+    background-color: $light-gray;
+    box-shadow: $box-shadow;
+}
+
+// Make the whole add-button area clickable.
+[class^="block__add"] {
+    width: 100%;
+    height: rem-calc(80px);
+}
+
+.block__actions {
+    margin-top: $global-margin;
+}
+
+.block__add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    // Make sure that our block__actions buttons stay clickable.
+    z-index: 2;
+    position: relative;
+}
+
+.module {
+    background-color: $white;
+    color: $module-font-color;
+    width: 100%;
+    margin-left: rem-calc(10px);
+    margin-right: rem-calc(10px);
+    padding: $global-padding;
+
+    // This is where the magic happens (if the browser supports flexbox)
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    [class^="fi-"] {
+        color: $black;
+    }
+}
+
+[placeholder] {
+    //font-size: $small-font-size;
+}
+
+[class^="fi-"] {
+    font-size: $global-font-size*2;
+}
+
+.block__actions--edit,
+.block__actions--delete {
+    position: relative;
+    top: rem-calc(12px);
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    padding: rem-calc(5px) rem-calc(6px);
+    width: $action-buttons-dimensions;
+    height: $action-buttons-dimensions;
+    z-index: 1;
+    //font-size: $global-font-size;
+}
+
+ .block__actions--edit {
+     left: rem-calc(2px);
+}
+//
+.block__actions--delete {
+    float: right;
+    right: rem-calc(2px);
+}
+
+.reveal {
+    color: $module-font-color;
+    box-shadow: $reveal-shadow;
+
+    // @TODO: This is really ugly. No other way since Foundation does not offer a way to limit the width on mobile (because it's weird to keep margins ...).
+    //width: 90% !important;
+
+    .reveal__title {
+        margin-top: $global-padding*2;
+        margin-bottom: $global-padding*2;
+        &.uppercase {
+            text-transform: uppercase;
+        }
+    }
+    .small-up-1>.column {
+        border-top: 1px solid $light-gray;
+        padding: $global-padding 0 0 0;
+        &:first-of-type {
+            border-top: none;
+        }
+        img {
+            margin-top: rem-calc(3px);
+            margin-bottom: $global-margin;
+        }
+    }
+    a {
+        color: inherit;
+    }
+}

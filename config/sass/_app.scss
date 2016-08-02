@@ -1,0 +1,46 @@
+.site__title {
+    background-color: $white;
+    text-align: center;
+    line-height: 58px;
+    margin-bottom: $global-margin;
+
+    img {
+        vertical-align: middle;
+    }
+}
+
+.instruction__stepper {
+    font-size: $small-font-size;
+    margin-bottom: $global-margin*1.75;
+}
+
+.instruction__title,
+.instruction__text {
+    margin-bottom: $global-margin*1.25;
+    hyphens: auto;
+}
+
+input[type="submit"].button {
+    letter-spacing: rem-calc(2px);
+}
+
+// Neat tooltip for fields when the placeholder is not visible anymore because user has input some text. Supported in latest Chrome and mobile Safari.
+.label__inner {
+    display: none;
+}
+input:focus:not(:placeholder-shown) + label {
+    position: relative;
+    .label__inner {
+        display: inline-block;
+        position: absolute;
+        top: rem-calc(-100px);
+        color: $body-font-color;
+        background-color: $black;
+        padding: $global-padding/2 $global-padding;
+        &::after {
+            @include css-triangle(15px, $black, down);
+            position: absolute;
+            bottom: rem-calc(-12px);
+        }
+    }
+}

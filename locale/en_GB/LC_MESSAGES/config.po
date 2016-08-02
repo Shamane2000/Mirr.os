@@ -1,0 +1,171 @@
+# mirr.OS v0.1.2.
+# Copyright (C) 2016
+# This file is distributed under the same license as the PACKAGE package.
+# mattes <ma@glancr.de>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mirr.OS v0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-17 10:20+0100\n"
+"PO-Revision-Date: 2016-04-17 18:35+0100\n"
+"Last-Translator: gorbo <info@gorbo.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: en_GB\n"
+
+msgid "setup modules"
+msgstr "Setup modules"
+
+msgid "connecting"
+msgstr "Connecting"
+
+msgid "connected"
+msgstr "Connected"
+
+msgid "failed"
+msgstr "Something is wrong."
+
+msgid "wlan failed text"
+msgstr ""
+"Please reconnect your phone or laptop with the wifi GlancrAP and check the "
+"wifi data."
+
+msgid "factory settings"
+msgstr "Factory settings"
+
+msgid "factory setting text"
+msgstr "Your glancr has been reset to factory settings."
+
+msgid "go on"
+msgstr "Go on"
+
+msgid "input password"
+msgstr "Please enter your password."
+
+msgid "choose wlan"
+msgstr "Choose wifi "
+
+msgid "step 1 of 2"
+msgstr "Step 1 of 2"
+
+msgid "step 2 of 2"
+msgstr "Step 2 of 2"
+
+msgid "connecting to wlan"
+msgstr "Connect mirr.OS with your network."
+
+msgid "wlan config text"
+msgstr ""
+"Please choose your wifi from the following list and enter your password."
+
+msgid "setup step 1"
+msgstr "Setup step 1"
+
+msgid "setup step 2"
+msgstr "Setup step 2"
+
+msgid "who are you?"
+msgstr "Tell us more about yourself."
+
+msgid "person setup text"
+msgstr "Please enter your name and email address."
+
+msgid "what is your first name?"
+msgstr "Your first name"
+
+msgid "where are you living?"
+msgstr "Please enter your city."
+
+msgid "your email address"
+msgstr "your email address"
+
+msgid "email hint"
+msgstr ""
+"This is where we will send your access data in order to start configuration."
+
+msgid "email again hint"
+msgstr "Please confirm your email adress."
+
+msgid "back to setup"
+msgstr "Back to configuration page"
+
+msgid "sorry"
+msgstr "Sorry"
+
+msgid "404"
+msgstr "404 - Website not found!"
+
+msgid "hi"
+msgstr "Hi"
+
+msgid "here"
+msgstr "Here"
+
+msgid "setup complete"
+msgstr "Setup complete!"
+
+msgid "done"
+msgstr "Done!"
+
+msgid "setup complete text"
+msgstr ""
+"mirr.OS ist now trying to connect with your wifi. Soon you will receive an "
+"email containing links for further configuration. The internal wifi GlancrAP "
+"is now shut down. Please reconnect with your personal wifi. Please consider "
+"the edition of your smart mirror."
+
+msgid "module overview"
+msgstr "Module overview"
+
+msgid "setup modules text"
+msgstr "That's it. You can now set up all modules the way you like it."
+
+msgid "which city?"
+msgstr "Which city do you want to know the weather for?"
+
+msgid "basic setup back link"
+msgstr ""
+"This is where you can change <a href=\"../wlanconfig/\">your basic settings</"
+"a> (language, wifi, email, name...)"
+
+msgid "config module's width"
+msgstr "Config module's width."
+
+msgid "half width"
+msgstr "Half width"
+
+msgid "full width"
+msgstr "Full width"
+
+msgid "add new module"
+msgstr "Add new module"
+
+msgid "email not sent"
+msgstr "The email could not be sent."
+
+msgid "email not sent text"
+msgstr ""
+"There is a problem with sending an email. To solve this problem mirr.OS now "
+"creates a new AP (Access Point). Subsequently you need to configure your "
+"smart mirror again."
+
+msgid "wireless"
+msgstr "Wifi"
+
+msgid "ethernet"
+msgstr "Cable"
+
+msgid "visible ssid"
+msgstr "Visible SSID"
+
+msgid "invisible ssid"
+msgstr "Invisible SSID"
+
+msgid "insert cable and reload site"
+msgstr "insert cable and reload site"
