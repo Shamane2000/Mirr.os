@@ -12,6 +12,7 @@
 <?php 
 include('../config/glancrConfig.php');
 
+$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
 $language = getConfigValue('language');
 
 $langParts = explode('_', $language);
@@ -19,18 +20,18 @@ $languageShort = $langParts[0];
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain("/var/www/html/locale");
+setGetTextDomain($basedir ."/locale");
 
 
-$modules_content = scandir('/var/www/html/modules');
+$modules_content = scandir($basedir .'/modules');
 
 foreach($modules_content as $file) {
-	if(is_dir('/var/www/html/modules/' . $file) && $file != '.' && $file != '..') {
+	if(is_dir($basedir .'/modules/' . $file) && $file != '.' && $file != '..') {
 		$modules_available[] = $file;
 	}
 }
 
-$modules_enabled = file('/var/www/html/config/modules_enabled');
+$modules_enabled = file($basedir .'/config/modules_enabled');
 foreach ($modules_enabled as $module_enabled) {
 	$modules = explode("\t", $module_enabled);
 	(sizeof($modules) > 1) ? $width = 'half' : $width = 'full';
