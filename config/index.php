@@ -3,10 +3,12 @@ include('glancrConfig.php');
 
 $language = getConfigValue('language');
 
+$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
+
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain("/var/www/html/locale");
+setGetTextDomain($basedir ."/locale");
 
 ?>
 <!DOCTYPE html>
@@ -48,15 +50,17 @@ setGetTextDomain("/var/www/html/locale");
 </header>
 <?php 
 $firstname = getConfigValue('firstname');
-$modules_content = scandir('/var/www/html/modules');
+$modules_content = scandir($basedir .'/modules');
+
+$modules_available = [];
 
 foreach($modules_content as $file) {
-	if(is_dir('/var/www/html/modules/' . $file) && $file != '.' && $file != '..') {
+	if(is_dir($basedir .'/modules/' . $file) && $file != '.' && $file != '..') {
 		$modules_available[] = $file;
 	}
 }
 
-$modules_enabled = file('/var/www/html/config/modules_enabled');
+$modules_enabled = file($basedir .'/config/modules_enabled');
 ?>
 <script type="text/javascript">
 var modules = [];
@@ -73,12 +77,12 @@ for($i = 0; $i < 6; $i++) {
 }
 
 foreach($modules_available as $module_available) {
-	setGetTextDomain("/var/www/html/modules/$module_available/locale");
+	setGetTextDomain($basedir ."/modules/$module_available/locale");
 	
 	echo "moduleNames['" . $module_available . "'] = '" . _($module_available . '_title') . "';\n";
 }
 
-setGetTextDomain("/var/www/html/locale");
+setGetTextDomain($basedir ."/locale");
 ?>
 </script>
 
@@ -118,7 +122,7 @@ for($i = 0; $i < 6; $i++) {
                         <div class="block__add">
 <?php 
 		if(strlen($modules[0]) > 0 && in_array($modules[0], $modules_available)) {
-			setGetTextDomain("/var/www/html/modules/" . $modules[0] . "/locale");
+			setGetTextDomain($basedir ."/modules/" . $modules[0] . "/locale");
 ?>                        
                             <div class="module">
                                 <button class="module__edit" data-open="gr-modal-<?php echo $modules[0];?>">
@@ -153,7 +157,7 @@ for($i = 0; $i < 6; $i++) {
                         <div class="block__add">
                             <?php 
 	if(strlen($nextModule) > 0 && in_array($nextModule, $modules_available)) {
-		setGetTextDomain("/var/www/html/modules/$nextModule/locale");
+		setGetTextDomain($basedir ."/modules/$nextModule/locale");
 		
 ?>                        
                             <div class="module">
@@ -181,13 +185,13 @@ for($i = 0; $i < 6; $i++) {
         </div>
 <?php 
 }
-setGetTextDomain("/var/www/html/locale");
+setGetTextDomain($basedir ."/locale");
 ?>
    </section>
 
     <!-- Modals, die dann geladen werden. -->
-     <section>    
-   
+     <section>
+
     	<div class="large reveal" data-reveal id="gr-modal-size" data-animation-in="fade-in" data-animation-out="fade-out" tabindex="1" role="dialog">
             <button class="close-button" data-close aria-label="Close modal" type="button">
                 <span aria-hidden="true">&times;</span>
@@ -200,7 +204,7 @@ setGetTextDomain("/var/www/html/locale");
                         <option value="1"><?php echo _("full width");?></option>
                     </optgroup>
                 </select>
-         
+
        	</div>
 
         <!-- Modal f�r neue Module. Wird getriggert mit  -->
@@ -216,7 +220,7 @@ setGetTextDomain("/var/www/html/locale");
                         	
  <?php 
  foreach ($modules_available AS $module_available) { 
- 	setGetTextDomain("/var/www/html/modules/$module_available/locale");
+ 	setGetTextDomain($basedir ."/modules/$module_available/locale");
  ?>           
                 <div class="column module-<?php echo $module_available;?>">
                     <a href="#" class="chooseModule">
@@ -237,7 +241,7 @@ setGetTextDomain("/var/www/html/locale");
         </div>
 <?php 
 foreach ($modules_available AS $module_available) { 
-	setGetTextDomain("/var/www/html/modules/$module_available/locale");
+	setGetTextDomain($basedir ."/modules/$module_available/locale");
 	echo "<link rel=\"stylesheet\" href=\"../modules/" . $module_available . "/backend/styles.css\">\n";
 ?>
 <div class="large reveal" data-reveal id="gr-modal-<?php echo $module_available;?>" data-animation-in="fade-in" data-animation-out="fade-out" tabindex="1" role="dialog">

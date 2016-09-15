@@ -1,11 +1,12 @@
 <?php 
 include('../config/glancrConfig.php');
 
+$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
 $language = getConfigValue('language');
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain("/var/www/html/locale");
+setGetTextDomain($basedir ."/locale");
 
 ?>
 <!DOCTYPE html>
@@ -96,7 +97,7 @@ if($con[0] == 'eth') {
     <section class="row">
     	<div id="languageMenu">
     	<?php 
-	            	$languagesAvailableFile = file('/var/www/html/config/languages_available');
+	            	$languagesAvailableFile = file(getBaseDir() .'/config/languages_available');
 					foreach ($languagesAvailableFile as $languageAvailableRow) {
 						$languageParts = explode("\t", $languageAvailableRow);
 						$selected = '';

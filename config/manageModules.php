@@ -2,10 +2,12 @@
 include('glancrConfig.php');
 
 $language = getConfigValue('language');
+$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
+
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain("/var/www/html/locale");
+setGetTextDomain($basedir . "/locale");
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,10 +34,10 @@ setGetTextDomain("/var/www/html/locale");
 <body>
 <?php 
 $firstname = getConfigValue('firstname');
-$modules_content = scandir('/var/www/html/modules');
+$modules_content = scandir($basedir .'/modules');
 
 foreach($modules_content as $file) {
-	if(is_dir('/var/www/html/modules/' . $file) && $file != '.' && $file != '..') {
+	if(is_dir($basedir .'/modules/' . $file) && $file != '.' && $file != '..') {
 		$modules_available[] = $file;
 	}
 }
@@ -57,7 +59,7 @@ $onServer = array_keys($serverVersions);
 			<table>
 				<?php 
 				foreach($modules_available as $module_available) { 
-					$versionFile = file('/var/www/html/modules/' . $module_available . '/version.txt');
+					$versionFile = file($basedir .'/modules/' . $module_available . '/version.txt');
 					echo "\t\t\t\t<tr><td>$module_available</td><td>" . $versionFile[0] . "</td>";
 					if(array_key_exists($module_available, $serverVersions)) {
 						unset($onServer[array_search($module_available, $onServer)]);
