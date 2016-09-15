@@ -47,6 +47,7 @@ for ($i = 0; $i < $za->numFiles; $i++) {
 			$fp = $za->getStream($fullFilePath);
 			if(!$fp) exit("Fehler\n");
 
+			$version = "";
 			while (!feof($fp)) {
 				$versionFileValid = true;
 				$version .= fread($fp, 2);

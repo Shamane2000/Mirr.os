@@ -13,7 +13,7 @@ setGetTextDomain("/var/www/html/locale");
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1164201device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title><?php echo _('module overview');?></title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" href="bower_components/foundation-icon-fonts/foundation-icons.css" media="screen" title="no title" charset="utf-8">
@@ -239,7 +239,18 @@ setGetTextDomain("/var/www/html/locale");
 foreach ($modules_available AS $module_available) { 
 	setGetTextDomain("/var/www/html/modules/$module_available/locale");
 	echo "<link rel=\"stylesheet\" href=\"../modules/" . $module_available . "/backend/styles.css\">\n";
+?>
+<div class="large reveal" data-reveal id="gr-modal-<?php echo $module_available;?>" data-animation-in="fade-in" data-animation-out="fade-out" tabindex="1" role="dialog">
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="text-center reveal__title"><?php echo _($module_available . '_title');?></h5>	
+<?php 	
 	include('../modules/' . $module_available . '/backend/template.php');
+?>
+
+</div>
+<?php 
 	echo '<script>';
 	include('../modules/' . $module_available . '/backend/script.js');
 	echo '</script>';

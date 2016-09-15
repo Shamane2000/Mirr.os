@@ -32,9 +32,9 @@ if(!$status[0]) {
 	$waitTimeoutInSeconds = 1;
 	$pingTries = 0;
 	while(!$fp = fsockopen($host,$port,$errCode,$errStr,$waitTimeoutInSeconds)){
-		usleep(500000);
+		usleep(1000000);
 		$pingTries++;
-		if($pingTries == 10) {
+		if($pingTries == 20) {
 			echo " failed";
 			sleep(5);
 			header("Location: index.php");
@@ -69,8 +69,8 @@ if(!$status[0]) {
 	while(curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200) {
 		$result = curl_exec($ch);
 		$mailTries++;
-		usleep(300000);
-		if($mailTries == 7) {
+		usleep(1000000);
+		if($mailTries == 20) {
 			setConfigValue('connectionType', 'wlan');
 			setConfigValue('emailNotSent', '1');
 			

@@ -63,7 +63,7 @@ $onServer = array_keys($serverVersions);
 						unset($onServer[array_search($module_available, $onServer)]);
 					
 						if($versionFile[0] < $serverVersions[$module_available]) {
-							echo "<td><a href='#' class='deleteModule' id='delete_$module_available'>delete</a></td><td><a class='updateModule' id='update_$module_available' href='#'>update to " . $serverVersions[$module_available] . "</a></td></tr>\n";
+							echo "<td><a href='#' class='deleteModule' id='delete_$module_available'>delete</a></td><td><a class='updateModule' id='update_$module_available' href='#'>update to <span id='version_$module_available'>" . $serverVersions[$module_available] . "</span></a></td></tr>\n";
 						} else {
 							echo "<td><a href='#' class='deleteModule' id='delete_$module_available'>delete</a></td><td>up to date</td></tr>\n";
 						}
@@ -73,7 +73,7 @@ $onServer = array_keys($serverVersions);
 					
 				}	
 				foreach($onServer as $moduleOnServer) {
-					echo "\t\t\t\t<tr><td>$moduleOnServer</td><td>" . $serverVersions[$moduleOnServer] . "</td><td>not installed</td><td><a class='installModule' id='install_$moduleOnServer' href='#'>install</a></td></tr>\n";
+					echo "\t\t\t\t<tr><td>$moduleOnServer</td><td><span id='version_$moduleOnServer'>" . $serverVersions[$moduleOnServer] . "</span></td><td>not installed</td><td><a class='installModule' id='install_$moduleOnServer' href='#'>install</a></td></tr>\n";
 				}
 				?>	
 
@@ -105,7 +105,7 @@ $('.deleteModule').click(function() {
 		$.ajax({
 			url: "deleteModule.php",
 	       		type: "POST",
-	       		data: {module: moduleName},
+	       		data: {module: moduleName, action: 'delete'},
 			success: function(response) {
 				console.log(response);
 			//	$('#delete_' + moduleName).parents('tr').remove();
@@ -117,44 +117,37 @@ $('.deleteModule').click(function() {
 
 $('.updateModule').click(function() {
 	moduleName = $(this).attr('id').substr(7);
+	version = $('#version_' + moduleName).text().trim();
+
+	alert(moduleName + ' ' + version);
+	
 	if(confirm("<?php echo _('really update module');?> " + moduleName)) {
 		$.ajax({
 			url: "deleteModule.php",
 	       		type: "POST",
-	       		data: {module: moduleName},
+	       		data: {module: moduleName, action: 'update'},
 			success: function(response) {
 				console.log(response);
-				$.ajax({
-					url: "downloadModule.php",
-			       		type: "POST",
-			       		data: {module: moduleName},
-					success: function(response) {
-						console.log(response);
-						$.ajax({
-							url: "installModule.php",
-					       		type: "POST",
-					       		data: {module: moduleName},
-							success: function(response) {
-								console.log(response);
-								$('#delete_' + moduleName).parents('tr').remove();
-								location.reload();
-							}
-					    });
-						location.reload();
-					}
-			    });
+				installModule(moduleName, version);
 			}
 	    });
 	}
 });
 
-$('.uploadModule').click(function() {
-	if() {
-		if(confirm("<?php echo _('really overwrite module');?> " + moduleName)) {
+$('.installModule').click(function() {
+	moduleName = $(this).attr('id').substr(8);
+	version = $('#version_' + moduleName).text().trim();
+
+	installModule(moduleName, version);
+});
+
+$('#uploadModule').click(function() {
+	if($.inArray(uploadModule, modulesAvailable) > -1) {
+		if(confirm("<?php echo _('really overwrite module');?> " + uploadModule)) {
 			$.ajax({
 				url: "deleteModule.php",
 		       		type: "POST",
-		       		data: {module: moduleName},
+		       		data: {module: uploadModule, action: 'update'},
 				success: function(response) {
 					console.log(response);
 				//	$('#delete_' + moduleName).parents('tr').remove();
@@ -167,19 +160,32 @@ $('.uploadModule').click(function() {
 	}	
 });
 
-function uploadAndInstallModule()
+function installModule(moduleName, moduleVersion) {
+	$.ajax({
+		url: "installModule.php",
+			type: "POST",
+			data: {name: moduleName, version: moduleVersion},
+		success: function(response) {
+			console.log(response);
+			location.reload();
+		}
+	});
+	
+}
+function uploadAndInstallModule() {
+	var file = $('#moduleZip')[0].files[0];
 	var fd = new FormData();
     fd.append("moduleZip", file);
     
 	$.ajax({
-		url: "uploadModuleZip.php",
+		url: "uploadModule.php",
 	    type: "POST",
 	    data: fd,
 	    processData: false,
 	    contentType: false,
 	    success: function(response) {
 	        console.log(response);
-	        $('#uploadModule').show();
+			location.reload();
 	    },
 	    error: function(jqXHR, textStatus, errorMessage) {
 	        console.log(errorMessage); // Optional
@@ -187,7 +193,10 @@ function uploadAndInstallModule()
 	 });
 }
 
+var uploadModule = "";
+
 $('#moduleZip').change(function() {
+	uploadModule = "";
 	$('#uploadModule').hide();
 	
 	var file = $('#moduleZip')[0].files[0];
@@ -212,6 +221,8 @@ $('#moduleZip').change(function() {
 	       contentType: false,
 	       success: function(response) {
 	           console.log(response);
+	           uploadModule = response.split(': ')[0];
+	           console.log('"' + uploadModule + '"');
 	           $('#uploadModule').show();
 	       },
 	       error: function(jqXHR, textStatus, errorMessage) {

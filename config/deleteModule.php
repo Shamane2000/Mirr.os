@@ -20,6 +20,18 @@ function deleteDir($dirPath) {
 }
 
 deleteDir('/var/www/html/modules/' . $_POST['module']);
-setConfigValue('reload', '1');
+
+if($_POST['action'] == 'delete') {
+	$modulesActive = file('/var/www/html/config/modules_enabled');
+	foreach ($modulesActive as $nr => $row) {
+		$modulesActive[$nr] = str_replace($_POST['module'], '', $row);
+	}
+	$fp = fopen('/var/www/html/config/modules_enabled', 'w');
+	fwrite($fp, implode("", $modulesActive));
+	
+	setConfigValue('reload', '1');
+}
+
+
 
 ?>

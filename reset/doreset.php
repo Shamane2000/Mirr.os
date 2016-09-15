@@ -47,6 +47,29 @@ $datei = file('/var/www/html/config/modules_enabled.default');
 $fp = fopen('/var/www/html/config/modules_enabled', 'w');
 fwrite($fp, implode("", $datei));
 
+// reinstall deleted default modules
+foreach ($datei as $row) {
+	$modules = explode("\t", $row);
+	foreach($modules as $module) {
+		if(is_dir('/var/www/html/modules/' . $module) !== TRUE) {
+			$version = file('http://localhost/server/modules/' . $module . '/version.txt');
+			
+			$url = 'http://localhost/config/installModule.php';
+			$data = array('name' => $module, 'version' => $version);
+			
+			$options = array(
+					'http' => array(
+							'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+							'method'  => 'POST',
+							'content' => http_build_query($data),
+					),
+			);
+			$context  = stream_context_create($options);
+			$installModule = file_get_contents($url, false, $context);
+		}
+	}
+}
+
 setConfigValue('ip', '');
 setConfigValue('firstname', '');
 setConfigValue('city', '');
