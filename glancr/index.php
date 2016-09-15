@@ -12,7 +12,6 @@
 <?php 
 include('../config/glancrConfig.php');
 
-$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
 $language = getConfigValue('language');
 
 $langParts = explode('_', $language);
@@ -39,7 +38,7 @@ foreach ($modules_enabled as $module_enabled) {
 		if(trim($module) == '' || !in_array(trim($module), $modules_available)) {
 			echo "<section class=\"module__" . $width. "width placeholdermodule\">\n";
 		} else {
-			setGetTextDomain("/var/www/html/modules/" . trim($module) . "/locale");
+			setGetTextDomain($basedir ."/modules/" . trim($module) . "/locale");
 			echo "<section class=\"module__" . $width. "width " . trim($module) . "module\">\n";
 			echo "<link rel=\"stylesheet\" href=\"../modules/" . trim($module) . "/frontend/styles.css\">\n";
 			echo "<script>";

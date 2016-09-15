@@ -43,15 +43,15 @@ $dbname = "glancr";
 $conn = new mysqli($servername, $username, $password, $dbname);
 $result = $conn->query('TRUNCATE TABLE configuration');
 
-$datei = file('/var/www/html/config/modules_enabled.default');
-$fp = fopen('/var/www/html/config/modules_enabled', 'w');
+$datei = file($basedir .'/config/modules_enabled.default');
+$fp = fopen($basedir .'/config/modules_enabled', 'w');
 fwrite($fp, implode("", $datei));
 
 // reinstall deleted default modules
 foreach ($datei as $row) {
 	$modules = explode("\t", $row);
 	foreach($modules as $module) {
-		if(is_dir('/var/www/html/modules/' . $module) !== TRUE) {
+		if(is_dir($basedir .'/modules/' . $module) !== TRUE) {
 			$version = file('http://localhost/server/modules/' . $module . '/version.txt');
 			
 			$url = 'http://localhost/config/installModule.php';

@@ -23,7 +23,7 @@ $language = getConfigValue('language');
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain("/var/www/html/locale");
+setGetTextDomain($basedir ."/locale");
 ?>
 <!DOCTYPE html>
 <html>

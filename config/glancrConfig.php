@@ -1,4 +1,7 @@
 <?php
+
+$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
+
 function getConfigValue($key) {
 	$servername = "localhost";
 	$username = "glancr";

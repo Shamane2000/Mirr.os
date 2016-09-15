@@ -13,9 +13,9 @@ if (!copy($file, $newFile)) {
 
 $zip = new ZipArchive();
 if ($zip->open($newFile, ZIPARCHIVE::CREATE)) {
-	$zip->extractTo('/var/www/html/modules/');
+	$zip->extractTo($basedir .'/modules/');
 	
-	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('/var/www/html/modules/' . $_POST['name']));
+	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($basedir .'/modules/' . $_POST['name']));
 	
 	foreach($iterator as $item) {
 		chmod($item, 0777);

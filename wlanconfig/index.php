@@ -1,7 +1,6 @@
 <?php 
 include('../config/glancrConfig.php');
 
-$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
 $language = getConfigValue('language');
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
