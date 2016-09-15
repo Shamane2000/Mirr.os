@@ -1,7 +1,7 @@
 <?php
 function getConfigValue($key) {
 	$servername = "localhost";
-	$username = "root";
+	$username = "glancr";
 	$password = "glancr";
 	$dbname = "glancr";
 	
@@ -21,7 +21,7 @@ function getConfigValue($key) {
 
 function setConfigValue($key, $value) {
 	$servername = "localhost";
-	$username = "root";
+	$username = "glancr";
 	$password = "glancr";
 	$dbname = "glancr";
 	
