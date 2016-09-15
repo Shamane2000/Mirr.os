@@ -97,7 +97,7 @@ if($con[0] == 'eth') {
     <section class="row">
     	<div id="languageMenu">
     	<?php 
-	            	$languagesAvailableFile = file(getBaseDir() .'/config/languages_available');
+	            	$languagesAvailableFile = file($basedir .'/config/languages_available');
 					foreach ($languagesAvailableFile as $languageAvailableRow) {
 						$languageParts = explode("\t", $languageAvailableRow);
 						$selected = '';
