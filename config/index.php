@@ -243,6 +243,11 @@ setGetTextDomain($basedir ."/locale");
                     </div>
                     <div class="modulepicker__confirmdelete" data-deleteModule-confirmbox="<?php echo $module_available ?>">
                         <div class="modulepicker__confirmdelete--inner">
+
+                            <?php
+                                setGetTextDomain($basedir ."/locale");
+                            ?>
+
                             <button type="button" class="alert button" data-deleteModule-cancel="<?php echo $module_available ?>"><?php echo _("cancel") ?><i class="fi-x"></i></button>
                             <button type="button" class="success button" data-deleteModule-confirm="<?php echo $module_available ?>"><?php echo _("delete") ?><i class="fi-check"></i></button>
                         </div>
@@ -293,7 +298,9 @@ foreach ($modules_available AS $module_available) {
 
     // Generate localized strings for JS output.
     <?php
-        echo "var LOCALE = " . json_encode(
+    setGetTextDomain($basedir ."/locale");
+
+    echo "var LOCALE = " . json_encode(
             [
                 "deleteSuccess" => _("module deleted"),
                 "notZip" => _('not a zip file'),
