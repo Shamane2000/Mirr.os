@@ -1,7 +1,16 @@
 <?php
 include('glancrConfig.php');
 
-function deleteDir($dirPath) {
+set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
+    // error was suppressed with the @-operator
+    if (0 === error_reporting()) {
+        return false;
+    }
+
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+});
+
+function deleteDir($dirPath)  {
     if (! is_dir($dirPath)) {
         exit("$dirPath must be a directory");
     }
@@ -19,7 +28,13 @@ function deleteDir($dirPath) {
     rmdir($dirPath);
 }
 
-deleteDir($basedir .'/modules/' . $_POST['module']);
+try {
+    deleteDir($basedir .'/modules/' . $_POST['module']);
+} catch (Exception $e) {
+    http_response_code(500);
+    echo $e->getMessage();
+}
+
 
 if($_POST['action'] == 'delete') {
 	$modulesActive = file($basedir .'/config/modules_enabled');
