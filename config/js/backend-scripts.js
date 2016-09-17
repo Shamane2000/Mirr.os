@@ -156,18 +156,41 @@ $('#gr-modal-add').on('closed.zf.reveal', function(){
 });
 
 /**
- * Install an uploaded module
- * @param moduleName
- * @param moduleVersion
+ * Installs a new module from a given ZIP file.
+ * @param moduleZip A valid module ZIP file, @see https://gitlab.com/glancr/modules for documentation.
  */
-function installModule(moduleName, moduleVersion) {
+function installModule(formData) {
+
     $.ajax({
         url: "installModule.php",
         type: "POST",
-        data: {name: moduleName, version: moduleVersion},
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function(response) {
             console.log(response);
-            location.reload();
+        }
+    });
+}
+
+/**
+ * Checks an uploaded module for code integrity, i.e. if all necessary files are present.
+ * @param formData A FormData object {@see https://developer.mozilla.org/en-US/docs/Web/API/FormData} containing a glancr module in ZIP format.
+ */
+function checkModuleIntegrity(formData) {
+    $.ajax({
+        url: "checkModuleZip.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            console.log(response);
+            uploadModule = response.split(': ')[0];
+            console.log('"' + uploadModule + ' upload is ok"');
+        },
+        error: function(jqXHR, textStatus, errorMessage) {
+            console.log(errorMessage); // Optional
         }
     });
 }
@@ -180,7 +203,6 @@ var zipInput = $('#moduleZip'),
     uploadButton = $('#uploadModule');
 
 zipInput.change(function() {
-    uploadModule = "";
     uploadButton.attr("disabled", true);
     uploadButton.addClass('loading__button');
     var initialText = uploadButton.text();
@@ -200,20 +222,8 @@ zipInput.change(function() {
         var fd = new FormData();
         fd.append("moduleZip", file);
 
-        $.ajax({
-            url: "checkModuleZip.php",
-            type: "POST",
-            data: fd,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                uploadModule = response.split(': ')[0];
-                console.log('"' + uploadModule + '"');
-            },
-            error: function(jqXHR, textStatus, errorMessage) {
-                console.log(errorMessage); // Optional
-            }
-        });
+        checkModuleIntegrity(fd);
+        installModule(fd);
     }
     window.setTimeout(
         function() {
@@ -222,5 +232,6 @@ zipInput.change(function() {
             uploadButton.removeClass('loading__button');
         },
         3000
-    )
+    );
+    location.reload();
 });

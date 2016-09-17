@@ -210,7 +210,7 @@ setGetTextDomain($basedir ."/locale");
                 <a href="https://glancr.de/module" target="_blank" class="button"><?php echo _("find modules") ?></a>
                 <button type="button" id="uploadModule" class="button" onclick="openZipUpload()"><?php echo _("install modules") ?>
                 </button>
-                <input type="file" id="moduleZip" class="uploadModule__button">
+                <input type="file" id="moduleZip" name="moduleZip" accept="application/zip" class="uploadModule__button">
                 <div class="uploadModule__error" id="fileError"></div>
             </div>
             <div class="row small-up-1">
