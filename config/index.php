@@ -92,6 +92,7 @@ setGetTextDomain($basedir ."/locale");
         </div>  
 <?php 
 for($i = 0; $i < 6; $i++) {
+    //@TODO: This throws "undefined offset" notices for full-width modules.
 	$modules = explode("\t", substr($modules_enabled[$i], 0, -1));
 ?>     
         <div class="row module-row">
@@ -130,7 +131,7 @@ for($i = 0; $i < 6; $i++) {
 ?>              
 							<button class="block__add--button" href="#" aria-label="plus button" data-open="gr-modal-add">
                                 <i class="fi-plus"></i>
-                            </button>          
+                            </button>
 <?php 
 		}
 ?>    
