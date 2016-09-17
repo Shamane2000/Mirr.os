@@ -209,7 +209,7 @@ zipInput.change(function() {
     uploadButton.html('<div class="loading__button--inner"></div>');
 
     var file = zipInput[0].files[0];
-    if(file.type != 'application/zip') {
+    if(file.type !== 'application/zip') {
         zipInput.val('');
         $('#fileError').text(LOCALE.notZip).animate({
             opacity: 0
