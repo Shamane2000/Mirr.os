@@ -104,7 +104,53 @@ main {
             margin-bottom: $global-margin;
         }
     }
-    a {
-        color: inherit;
+    .chooseModule, .fi-trash {
+        color: initial;
     }
+}
+
+.uploadModule__button {
+    display: none;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .modulepicker__choosebox {
+        width: 90%;
+    }
+    .modulepicker__deletebox {
+        width: 10%;
+        display: flex;
+        justify-content: center;
+    }
+    .modulepicker__confirmdelete {
+        width: 100%;
+        display: none;
+    }
+    .modulepicker__confirmdelete--inner {
+        display: flex;
+        justify-content: space-around;
+        .button {
+            width: 45%;
+        }
+        i {
+            vertical-align: middle;
+            margin-left: $global-margin;
+        }
+    }
+}
+
+.moduleManager {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .button {
+        width: 45%;
+    }
+}
+.uploadModule__error {
+    width: 100%;
 }

@@ -1,0 +1,30 @@
+$base-line-height: 24px;
+$loader-color: $black;
+$off-white: rgba($black, 0.2);
+$spin-duration: 1s;
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading__button {
+  min-width: 7rem;
+  max-height: 2.5rem;
+}
+
+.loading__button--inner {
+  border-radius: 50%;
+  width: $base-line-height;
+  height: $base-line-height;
+  border: .25rem solid $off-white;
+  border-top-color: $loader-color;
+  animation: spin $spin-duration infinite linear;
+  margin: 0 auto;
+  position: relative;
+  top: -7px;
+}
