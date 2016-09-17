@@ -21,12 +21,6 @@ setGetTextDomain($basedir ."/locale");
   .error {
   	border: 2px solid red;
   }
-  .reveal a {
- 	color: #14243C;
-  }
-  a {
-  	text-decoration: underline;
-  }
   .validate {
     position: relative;
     top: -19px;
@@ -106,7 +100,7 @@ for($i = 0; $i < 6; $i++) {
                     <!-- bearbeiten-Button für die gesamte Zeile -->
                     <input type="hidden" name="size-row" value="<?php echo $i;?>">
                     <button class="block__actions--edit" data-open="gr-modal-size">
-                        <span class="fi-widget"></span>
+                        <i class="fi-widget"></i>
                     </button>
                 </div>
                 <!-- zwei Hinzufügen-Buttons für neue Widgets -->
@@ -124,18 +118,18 @@ for($i = 0; $i < 6; $i++) {
 ?>                        
                             <div class="module">
                                 <button class="module__edit" data-open="gr-modal-<?php echo $modules[0];?>">
-                                    <span class="fi-pencil"></span>
+                                    <i class="fi-pencil"></i>
                                 </button>
                                 <span class="module__title"><?php echo _($modules[0] . '_title');?></span>
                                 <button class="module__delete" href="#">
-                                    <span class="fi-trash"></span>
+                                    <i class="fi-trash"></i>
                                 </button>
                             </div>
 <?php 
 		} else {
 ?>              
 							<button class="block__add--button" href="#" aria-label="plus button" data-open="gr-modal-add">
-                                <span class="fi-plus"></span>
+                                <i class="fi-plus"></i>
                             </button>          
 <?php 
 		}
@@ -160,7 +154,7 @@ for($i = 0; $i < 6; $i++) {
 ?>                        
                             <div class="module">
                                 <button class="module__edit" data-open="gr-modal-<?php echo $nextModule;?>">
-                                    <span class="fi-pencil"></span>
+                                    <i class="fi-pencil"></i>
                                 </button>
                                 <span class="module__title"><?php echo _($nextModule . '_title');?></span>
                                 <button class="module__delete" href="#">
@@ -171,7 +165,7 @@ for($i = 0; $i < 6; $i++) {
 	} else {
 ?>              
 							<button class="block__add--button" href="#" aria-label="plus button" data-open="gr-modal-add">
-                                <span class="fi-plus"></span>
+                                <i class="fi-plus"></i>
                             </button>          
 <?php 
 	}
@@ -212,6 +206,13 @@ setGetTextDomain($basedir ."/locale");
             </button>
             <h5 class="text-center reveal__title uppercase"><?php echo _("add new module");?></h5>
 
+            <div class="moduleManager">
+                <a href="https://glancr.de/module" target="_blank" class="button"><?php echo _("find modules") ?></a>
+                <button type="button" id="uploadModule" class="button" onclick="openZipUpload()"><?php echo _("install modules") ?>
+                </button>
+                <input type="file" id="moduleZip" class="uploadModule__button">
+                <div class="uploadModule__error" id="fileError"></div>
+            </div>
             <div class="row small-up-1">
             <input type="hidden" name="newModulCol" id="newModulCol" value="-1">
            	<input type="hidden" name="newModulRow" id="newModulRow" value="-1">
@@ -220,18 +221,33 @@ setGetTextDomain($basedir ."/locale");
  foreach ($modules_available AS $module_available) { 
  	setGetTextDomain($basedir ."/modules/$module_available/locale");
  ?>           
-                <div class="column module-<?php echo $module_available;?>">
-                    <a href="#" class="chooseModule">
-                    	<input type="hidden" name="newModulId" class="newModulId" value="<?php echo $module_available;?>">
-                    	<div class="small-3 columns">
-                            <img width="55" height="55" style="background-color: #ddd;" src="../modules/<?php echo $module_available;?>/assets/icon.svg" alt="logo" />
+                <section class="column module-<?php echo $module_available;?> flex-row">
+                    <div class="modulepicker__choosebox">
+                        <a href="#" class="chooseModule">
+                            <input type="hidden" name="newModulId" class="newModulId" value="<?php echo $module_available;?>">
+                            <div class="small-3 columns">
+                                <img width="55" height="55" style="background-color: #ddd;" src="../modules/<?php echo $module_available;?>/assets/icon.svg" alt="logo" />
+                            </div>
+                            <div class="small-9 columns">
+                                <h6><?php echo _($module_available . '_title');?></h6>
+                                <p><?php echo _($module_available . '_description');?></p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="modulepicker__deletebox">
+                        <a href="#" data-deleteModule="<?php echo $module_available ?>">
+                            <i class="fi-trash"></i>
+                            <input type="hidden" name="deleteModuleId" class="deleteModuleId" value="<?php echo $module_available;?>" />
+                        </a>
+                    </div>
+                    <div class="modulepicker__confirmdelete" data-deleteModule-confirmbox="<?php echo $module_available ?>">
+                        <div class="modulepicker__confirmdelete--inner">
+                            <button type="button" class="alert button" data-deleteModule-cancel="<?php echo $module_available ?>"><?php echo _("cancel") ?><i class="fi-x"></i></button>
+                            <button type="button" class="success button" data-deleteModule-confirm="<?php echo $module_available ?>"><?php echo _("delete") ?><i class="fi-check"></i></button>
                         </div>
-                        <div class="small-9 columns">  	
-                            <h6><?php echo _($module_available . '_title');?></h6>
-                            <p><?php echo _($module_available . '_description');?></p>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                </section>
 <?php 
  }
  ?>
@@ -271,119 +287,20 @@ foreach ($modules_available AS $module_available) {
 <script type="text/javascript" src="bower_components/foundation-sites/dist/foundation.min.js"></script>
 <script type="text/javascript" src="bower_components/foundation-sites/js/foundation.util.mediaQuery.js"></script>
 
+<script type="text/javascript" src="js/backend-scripts.js"></script>
 <script type="text/javascript">
-    $(document).foundation(); 
+    $(document).foundation();
 
-   	$(document).ready(function() {
-		$.each(modulesInUse, function(index, value) {
-			$('.module-' + value).hide();
-		});
-		
-			
-	});
-
-   	
-   	
-	$('input[type="text"]').focus(function() {
-		$(this).removeClass('error');
-	});
-	
-    $('.block__actions--edit').click(function() {
-    	$('#size-row').val($(this).prev().val());
-    	$('#layout').val(modules[$(this).prev().val()].length);
-    }); 
-
-    $('#layout').change(function() {
-		var row = $('#size-row').val();
-		var cols = $(this).val();
-		
-		if(cols == 1) {
-			if(modules[row][1].length > 0) {
-				modulesInUse = $.grep(modulesInUse, function(value) {
-		        	return value != modules[row][1];
-		        });
-		        $('.module-' + modules[row][1]).show();
-			}
-			modules[row].splice(1, 1);
-			
-			$('.module-row:eq(' + row + ')').find('.small-6:eq(1)').remove();
-			$('.module-row:eq(' + row + ')').find('.small-6:eq(0)').removeClass('small-6').addClass('small-12');
-		} else {
-			modules[row][1] = '';
-			$('.module-row:eq(' + row + ') > .small-12:eq(0)').find('.small-12:eq(0)').removeClass('small-12').addClass('small-6');
-			$('.module-row:eq(' + row + ') > .small-12:eq(0) > .row > .small-6:eq(0)').after('<div class="small-6 columns"><div class="block__add">'
- 				+ '<button class="block__add--button" href="#" aria-label="plus button" data-open="gr-modal-add">' 
- 				+ '<span class="fi-plus"></span></button></div></div>');
-		}
-
-		$.post('writeLayout.php', {'row' : row, 'modules[]': modules[row]})
-			.done(function() { 
-				$('#gr-modal-size').foundation('close');
-			});
-    });
-
-    $('body').delegate('.block__add--button', 'click', function() {
-    	var col;
-    	if($(this).parent().parent().hasClass('small-12') || $(this).parent().parent().next().hasClass('small-6')) {
-        	col = 0;
-    	} else {
-        	col = 1;
-    	}
-		var row = $(this).parent().parent().parent().parent().children().eq(0).children().eq(0).val();
-		$("#newModulCol").val(col);
-		$("#newModulRow").val(row);
-    });
-
-    $('body').delegate('.module__delete', 'click', function() {
-    	var col;
-    	if($(this).parent().parent().parent().hasClass('small-12') || $(this).parent().parent().parent().next().hasClass('small-6')) {
-        	col = 0;
-    	} else {
-        	col= 1;
-    	}
-		var row = $(this).parent().parent().parent().parent().parent().children().eq(0).children().eq(0).val();
-		var moduleId = modules[row][col];
-		
-		modules[row][col] = ''; 
-		$.post('writeLayout.php', {'row' : row, 'modules[]': modules[row]});
-		
-        $(this).parent().parent().html('<button class="block__add--button" href="#" aria-label="plus button" data-open="gr-modal-add">' 
-			+ '<span class="fi-plus"></span></button>');
-
-        modulesInUse = $.grep(modulesInUse, function(value) {
-        	return value != moduleId;
-        });
-        $('.module-' + moduleId).show();
-    });
-
-    $('.chooseModule').click(function() {
-		var row = $("#newModulRow").val();
-		var col = $("#newModulCol").val();
-		var moduleId = $(this).children('.newModulId').val();
-
-		modules[row][col] = moduleId; 
-		
-        $('.module-row').eq(row).children().eq(0).children().eq(1).children().eq(col).children().eq(0).html(
-        	'<div class="module">' +
-            '    <button class="module__edit" data-open="gr-modal-' + moduleId + '">' +
-            '        <span class="fi-pencil"></span>' +
-            '    </button>' +
-            '    <span class="module__title">' + moduleNames[moduleId] + '</span>' +
-            '    <button class="module__delete" href="#">' +
-            '        <span class="fi-trash"></span>' +
-            '    </button>' +
-            '</div>');
-
-        modulesInUse.push(moduleId);
-        $('.module-' + moduleId).hide();
-
-        $.post('writeLayout.php', {'row' : row, 'modules[]': modules[row]})
-		.done(function() { 
-			$('#gr-modal-add').foundation('close');
-			return false;
-		});
-    });
-
+    // Generate localized strings for JS output.
+    <?php
+        echo "var LOCALE = " . json_encode(
+            [
+                "deleteSuccess" => _("module deleted"),
+                "notZip" => _('not a zip file'),
+                "overwriteModule" => _('really overwrite module?'),
+                "internalError" => _('there was an internal server error: ')
+            ]
+        ); ?>
 </script>
 </body>
 </html>
