@@ -1,8 +1,8 @@
 <?php
 include('../config/glancrConfig.php');
 
-$email = getConfigValue($email);
-$firstName = getConfigValue($firstname);
+$email = getConfigValue('email');
+$firstName = getConfigValue('firstname');
 
 setConfigValue('reset', "1");
 
@@ -15,6 +15,7 @@ if(strlen($email) > 0 && strlen($firstName)) {
 	$jsonData = array(
 			'name' => $firstName,
 			'email' => $email,
+			//@TODO IP is not needed for reset (but API wants it atm)
 			'localip' => '192.168.1.1',
 			'type' => 'reset'
 	);
