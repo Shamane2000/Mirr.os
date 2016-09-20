@@ -61,6 +61,7 @@ var moduleNames = {};
 var modulesInUse = []
 <?php 
 for($i = 0; $i < 6; $i++) {
+    //@TODO: This throws "undefined offset" notices for full-width modules.
 	$modules = explode("\t", substr($modules_enabled[$i], 0, -1));
 	echo  "modules[$i] = [];\n";
 	foreach ($modules AS $key => $module) {
@@ -88,17 +89,17 @@ setGetTextDomain($basedir ."/locale");
                 <p>
                 	<?php echo _("basic setup back link");?>
                 </p>
-            </div>
-            <?php
+                <?php
                 // Output update button if there are updates available for an installed module. Module names are passed to JS in bottom script tag.
                 if(sizeof($updates_available) > 0) : ?>
                     <div id="update-notification">
                         <p><?php echo _("We made some changes.") ?></p>
                         <p><button class="button" onclick='updateModules(<?php echo json_encode($updates_available); ?>)'><?php echo _("Update modules now") ?></button></p>
                     </div>
-            <?php
+                    <?php
                 endif;
-            ?>
+                ?>
+            </div>
         </div>  
 <?php 
 for($i = 0; $i < 6; $i++) {
@@ -316,7 +317,7 @@ foreach ($modules_available AS $module_available) {
                 "deleteSuccess" => _("module deleted"),
                 "notZip" => _('not a zip file'),
                 "overwriteModule" => _('really overwrite module?'),
-                "internalError" => _('there was an internal server error: '),
+                "internalError" => _('there was a server error: '),
                 "updatesSuccess" => _('all updates were successful!')
             ]
         ) . ";"
