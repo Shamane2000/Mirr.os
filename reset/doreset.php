@@ -8,6 +8,7 @@ setConfigValue('reset', "1");
 
 // send mail
 if(strlen($email) > 0 && strlen($firstName)) {
+	//@TODO: Refactor API calls with class
 	$url = 'https://api.glancr.de/mail/';
 	
 	$ch = curl_init($url);
