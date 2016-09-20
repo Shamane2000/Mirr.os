@@ -53,7 +53,7 @@ foreach ($datei as $row) {
 	$modules = explode("\t", $row);
 	foreach($modules as $module) {
 		if(is_dir($basedir .'/modules/' . $module) !== TRUE) {
-			$version = file('http://localhost/server/modules/' . $module . '/version.txt');
+			$version = file($apibaseurl . '/update/modules/' . $module . '/version.txt');
 			
 			$url = 'http://localhost/config/installModule.php';
 			$data = array('name' => $module, 'version' => $version);
