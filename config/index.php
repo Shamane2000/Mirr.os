@@ -43,7 +43,12 @@ setGetTextDomain($basedir ."/locale");
 <?php 
 $firstname = getConfigValue('firstname');
 $modules_content = scandir($basedir .'/modules');
-$updates_available = unserialize(getConfigValue('module_updates'));
+
+if (getConfigValue('module_updates') !== 'GLANCR_DEFAULT') {
+    $updates_available = unserialize(getConfigValue('module_updates'));
+} else {
+    $updates_available = [];
+}
 
 $modules_available = [];
 
@@ -58,10 +63,10 @@ $modules_enabled = file($basedir .'/config/modules_enabled');
 <script type="text/javascript">
 var modules = [];
 var moduleNames = {};
-var modulesInUse = []
+var modulesInUse = [];
 <?php 
 for($i = 0; $i < 6; $i++) {
-    //@TODO: This throws "undefined offset" notices for full-width modules.
+    //@FIXME: This throws "undefined offset" notices for full-width modules.
 	$modules = explode("\t", substr($modules_enabled[$i], 0, -1));
 	echo  "modules[$i] = [];\n";
 	foreach ($modules AS $key => $module) {
@@ -103,7 +108,7 @@ setGetTextDomain($basedir ."/locale");
         </div>  
 <?php 
 for($i = 0; $i < 6; $i++) {
-    //@TODO: This throws "undefined offset" notices for full-width modules.
+    //@FIXME: This throws "undefined offset" notices for full-width modules.
 	$modules = explode("\t", substr($modules_enabled[$i], 0, -1));
 ?>     
         <div class="row module-row">
