@@ -3,7 +3,7 @@
 $basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
 
 //$apibaseurl = 'http://api.glancr.dev:8888';
-$apibaseurl = 'https://api.glancr.de/';
+$apibaseurl = 'https://api.glancr.de';
 
 function getConfigValue($key) {
 	$servername = "localhost";
