@@ -16,7 +16,6 @@ foreach($modules_content as $file) {
         $modules_available[] = $file;
     }
 }
-$test = file_get_contents($apibaseurl .'/update/getVersions.php');
 $serverVersions = json_decode(file_get_contents($apibaseurl .'/update/getVersions.php'), true);
 $onServer = array_keys($serverVersions);
 
@@ -40,7 +39,7 @@ foreach($modules_available as $module_available) {
     }
 }
 
-$api = new \glancr\glancrServerApi();
+$api = new \glancr\glancrServerApi($apibaseurl);
 $api->triggerMail('update');
 
 setConfigValue('module_updates', serialize($updates_available));
