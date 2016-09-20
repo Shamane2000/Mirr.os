@@ -39,7 +39,8 @@ foreach($modules_available as $module_available) {
     }
 }
 
-$api = new \glancr\glancrServerApi($apibaseurl);
-$api->triggerMail('update');
-
-setConfigValue('module_updates', serialize($updates_available));
+if (!empty($updates_available)) {
+    setConfigValue('module_updates', serialize($updates_available));
+    $api = new \glancr\glancrServerApi($apibaseurl);
+    $api->triggerMail('update');
+}

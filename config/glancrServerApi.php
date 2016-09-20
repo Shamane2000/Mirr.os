@@ -76,5 +76,4 @@ class glancrServerApi
 
         return $result;
     }
-
 }
