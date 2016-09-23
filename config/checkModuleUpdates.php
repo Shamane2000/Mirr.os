@@ -40,7 +40,11 @@ foreach($modules_available as $module_available) {
 }
 
 if (!empty($updates_available)) {
-    setConfigValue('module_updates', serialize($updates_available));
-    $api = new \glancr\glancrServerApi($apibaseurl);
-    $api->triggerMail('update');
+    if (unserialize(getConfigValue('module_updates')) === $updates_available) {
+        return;
+    } else {
+        setConfigValue('module_updates', serialize($updates_available));
+        $api = new \glancr\glancrServerApi($apibaseurl);
+        $api->triggerMail('update');
+    }
 }
