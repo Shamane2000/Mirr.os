@@ -323,6 +323,7 @@ foreach ($modules_available AS $module_available) {
                 "notZip" => _('not a zip file'),
                 "overwriteModule" => _('really overwrite module?'),
                 "internalError" => _('there was a server error: '),
+                "confirmModuleUpdates" => _('do you really want to update all modules?'),
                 "updatesSuccess" => _('all updates were successful!')
             ]
         ) . ";"

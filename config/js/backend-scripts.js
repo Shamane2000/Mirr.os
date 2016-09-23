@@ -252,25 +252,27 @@ zipInput.change(function() {
 
 
 function updateModules(updates) {
-    console.log(updates);
-    updates.forEach(function(module) {
-        $.ajax({
-            url: "updateModule.php",
-            type: "POST",
-            data: {name: module.name, version: module.newVersion},
-            success: function(response) {
-                checkForModuleUpdates();
-                $('#update-notification').html(LOCALE.updatesSuccess).animate({
-                    opacity: 0
-                }, 6000, function() {
-                    $(this).text('');
-                    $(this).css('opacity',1);
-                });
-            },
-            error: function (response) {
-                $('#update-notification').html(LOCALE.internalError + response.responseText)
-                //@TODO: improve error handling: At least show button to retry update or contact devs
-            }
-        })
-    });
+
+    if (window.confirm(LOCALE.confirmModuleUpdates)) {
+        updates.forEach(function(module) {
+            $.ajax({
+                url: "updateModule.php",
+                type: "POST",
+                data: {name: module.name, version: module.newVersion},
+                success: function(response) {
+                    checkForModuleUpdates();
+                    $('#update-notification').html(LOCALE.updatesSuccess).animate({
+                        opacity: 0
+                    }, 6000, function() {
+                        $(this).text('');
+                        $(this).css('opacity',1);
+                    });
+                },
+                error: function (response) {
+                    $('#update-notification').html(LOCALE.internalError + response.responseText)
+                    //@TODO: improve error handling: At least show button to retry update or contact devs
+                }
+            })
+        });
+    }
 }
