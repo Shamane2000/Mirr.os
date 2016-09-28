@@ -21,7 +21,9 @@ class SystemUpdater
         $this->update->setUpdateUrl(GLANCR_API_BASE . '/update/system');
         // The following two lines are optional
         $this->update->addLogHandler(new Monolog\Handler\StreamHandler(GLANCR_ROOT . '/update.log'));
-        $this->update->setCache(new Desarrolla2\Cache\Adapter\File(GLANCR_ROOT . '/cache'), 3600);
+
+        //@FIXME: Caching updates seems broken on latest revision, don't use it in the meantime
+//        $this->update->setCache(new Desarrolla2\Cache\Adapter\File(GLANCR_ROOT . '/cache'), 3600);
     }
 
     /**
