@@ -50,6 +50,12 @@ if (getConfigValue('module_updates') !== 'GLANCR_DEFAULT') {
     $updates_available = [];
 }
 
+if (getConfigValue('system_updates') !== 'GLANCR_DEFAULT') {
+    $system_updates_available = getConfigValue('system_updates');
+} else {
+    $system_updates_available = null;
+}
+
 $modules_available = [];
 
 foreach($modules_content as $file) {
@@ -103,6 +109,12 @@ setGetTextDomain($basedir ."/locale");
                     </div>
                     <?php
                 endif;
+                if(!empty($system_updates_available)) : ?>
+                    <div id="system-update-notification">
+                        <p><?php echo _("There's a system update available for your Glancr: Version $system_updates_available") ?></p>
+                        <p><button class="button" onclick='/* @TODO: add JS handler */'><?php echo _("Update system now") ?></button></p>
+                <?php
+                    endif;
                 ?>
             </div>
         </div>  
@@ -324,6 +336,7 @@ foreach ($modules_available AS $module_available) {
                 "overwriteModule" => _('really overwrite module?'),
                 "internalError" => _('there was a server error: '),
                 "confirmModuleUpdates" => _('do you really want to update all modules?'),
+                "confirmSystemUpdate" => _('do you really want to update mirr.OS?'),
                 "updatesSuccess" => _('all updates were successful!')
             ]
         ) . ";"
