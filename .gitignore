@@ -3,3 +3,4 @@ wlans.txt
 /config/config.codekit
 /vendor
 /cache
+/update.log
