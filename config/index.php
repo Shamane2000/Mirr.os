@@ -112,7 +112,7 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                 if(!empty($system_updates_available)) : ?>
                     <div id="system-update-notification">
                         <p><?php echo _("There's a system update available for your Glancr: Version $system_updates_available") ?></p>
-                        <p><button class="button" onclick='/* @TODO: add JS handler */'><?php echo _("Update system now") ?></button></p>
+                        <p><button class="button" onclick='updateSystem()'><?php echo _("Update system now") ?></button></p>
                 <?php
                     endif;
                 ?>
