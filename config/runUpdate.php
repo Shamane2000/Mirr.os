@@ -10,7 +10,7 @@ switch ($_POST['type']) {
         $result = $update->updateSystem();
         return $result;
         break;
-    case 'modules':
+    case 'module':
         $update = new \glancr\ModuleUpdater();
         $result = $update->updateModule($_POST['name'], $_POST['version']);
         if($result === true) {
