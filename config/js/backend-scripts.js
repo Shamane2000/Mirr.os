@@ -256,9 +256,9 @@ function updateModules(updates) {
     if (window.confirm(LOCALE.confirmModuleUpdates)) {
         updates.forEach(function(module) {
             $.ajax({
-                url: "updateModule.php",
+                url: "runUpdate.php",
                 type: "POST",
-                data: {name: module.name, version: module.newVersion},
+                data: {type: 'module', name: module.name, version: module.newVersion},
                 success: function(response) {
                     checkForModuleUpdates();
                     $('#update-notification').html(LOCALE.updatesSuccess).animate({
