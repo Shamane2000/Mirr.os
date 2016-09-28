@@ -1,5 +1,8 @@
 {
     "require": {
         "visualappeal/php-auto-update": "^0.9.2"
+    },
+    "autoload": {
+        "psr-4": {"glancr\\": "classes/"}
     }
 }
