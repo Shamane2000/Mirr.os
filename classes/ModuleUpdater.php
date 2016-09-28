@@ -69,21 +69,22 @@ class ModuleUpdater
         $file = GLANCR_API_BASE . '/update/moduleZips/' . $name . '-' . $version . '.zip';
         $tmpFile = GLANCR_ROOT . '/tmp/tmp_file.zip';
 
+        $result = false;
+
         if (!copy($file, $tmpFile)) {
-            http_response_code(500);
-            exit("failed to create $tmpFile from $file...\n");
+            error_log("failed to create $tmpFile from $file...\n");
         }
 
         $zip = new ZipArchive();
         if ($zip->open($tmpFile, ZIPARCHIVE::CREATE)) {
             $zip->extractTo(GLANCR_ROOT .'/modules/');
             $zip->close();
-            http_response_code(200);
-        } else {
-            http_response_code(500);
+            $result = true;
         }
 
         unlink($tmpFile);
         setConfigValue('reload', '1');
+
+        return $result;
     }
 }
