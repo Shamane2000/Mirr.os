@@ -276,3 +276,26 @@ function updateModules(updates) {
         });
     }
 }
+
+function updateSystem() {
+
+    if (window.confirm(LOCALE.confirmSystemUpdate)) {
+        $.ajax({
+            url: "runUpdate.php",
+            type: "POST",
+            data: {type: 'system'},
+            success: function(response) {
+                $('#system-update-notification').html(LOCALE.updatesSuccess).animate({
+                    opacity: 0
+                }, 6000, function() {
+                    $(this).text('');
+                    $(this).css('opacity',1);
+                });
+            },
+            error: function (response) {
+                $('#system-update-notification').html(LOCALE.internalError + response.responseText)
+                //@TODO: improve error handling: At least show button to retry update or contact devs
+            }
+        })
+    }
+}
