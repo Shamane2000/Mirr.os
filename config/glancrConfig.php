@@ -1,9 +1,8 @@
 <?php
 
-$basedir = substr(__DIR__, 0, strrpos(__DIR__, '/'));
-
-//$apibaseurl = 'http://api.glancr.dev:8888';
-$apibaseurl = 'https://api.glancr.de';
+define('GLANCR_ROOT', getcwd());
+define('GLANCR_API_BASE', 'http://api.glancr.dev:8888');
+//define('GLANCR_API_BASE', 'https://api.glancr.de');
 
 function getConfigValue($key) {
 	$servername = "localhost";
