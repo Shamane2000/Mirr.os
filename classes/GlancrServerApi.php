@@ -6,16 +6,15 @@
 namespace glancr;
 
 
-class glancrServerApi
+class GlancrServerApi
 {
     //API base url
     private $url;
 
-    function __construct($baseurl)
+    function __construct($apiBaseUrl)
     {
         // @TODO: This is not really OOP, but works for now. Maybe refactor Config as a class and use DI?
-        require_once 'glancrConfig.php';
-        $this->url = $baseurl;
+        $this->url = $apiBaseUrl;
     }
 
     /**
@@ -72,8 +71,8 @@ class glancrServerApi
             if ($mailTries == 5) {
                 error_log("mail could not be sent " . print_r($jsonData));
             }
+            error_log("mail sent");
         }
-
         return $result;
     }
 }
