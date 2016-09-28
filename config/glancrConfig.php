@@ -41,4 +41,6 @@ function setGetTextDomain($directory) {
 	bind_textdomain_codeset('config', 'UTF-8');
 }
 
-?>
+function getSystemInfo() {
+    return json_decode(file_get_contents(GLANCR_ROOT . '/info.json'));
+}
