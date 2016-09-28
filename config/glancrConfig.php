@@ -1,6 +1,6 @@
 <?php
 
-define('GLANCR_ROOT', getcwd());
+define('GLANCR_ROOT', substr(__DIR__, 0, strrpos(__DIR__, '/')));
 define('GLANCR_API_BASE', 'http://api.glancr.dev:8888');
 //define('GLANCR_API_BASE', 'https://api.glancr.de');
 
