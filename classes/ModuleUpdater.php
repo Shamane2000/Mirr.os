@@ -1,7 +1,6 @@
 <?php
 
 namespace glancr;
-
 use ZipArchive;
 
 class ModuleUpdater
@@ -57,7 +56,13 @@ class ModuleUpdater
         }
     }
 
+    /**
+     * @param string $name A valid Glancr module name, all lowercased. Must exist on the server.
+     * @param string $version A correct version number for the given module.
+     * @return bool true if the module installation was successful, false otherwise.
+     */
     function updateModule($name, $version) {
+        // Generate the module ZIP file from the latest source.
         //@TODO: Refactor this with Guzzle/cURL or similar.
         file_get_contents(GLANCR_API_BASE . '/update/zipModule.php?module=' . $name);
 

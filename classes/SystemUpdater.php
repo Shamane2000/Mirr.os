@@ -4,7 +4,6 @@ namespace glancr;
 use \VisualAppeal\AutoUpdate;
 use \Monolog;
 use \Desarrolla2;
-use ZipArchive;
 
 class SystemUpdater
 {
