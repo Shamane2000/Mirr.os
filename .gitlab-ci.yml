@@ -1,20 +1,17 @@
 # Select image from https://hub.docker.com/r/_/php/
 image: php:5.6
 
-before_script:
-# Install dependencies
-- pwd
-- bash ci/docker_install.sh > /dev/null
-# Install composer dependencies
-- curl --silent --show-error https://getcomposer.org/installer | php
-- php composer.phar install
+cache:
+  paths:
+  - vendor/
 
-# Composer stores all downloaded packages in the vendor/ directory.
-# Do not use the following if the vendor/ directory is commited to
-# your git repository.
-#cache:
-#  paths:
-#  - vendor/
+before_script:
+  # Install git (the php image doesn't have it) which is required by composer
+  - apt-get update -yqq
+  - apt-get install git -yqq
+  # Install composer dependencies
+  - curl --silent --show-error https://getcomposer.org/installer | php
+  - php composer.phar install
 
 stages:
   - deploy
