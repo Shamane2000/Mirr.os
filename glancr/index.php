@@ -19,18 +19,18 @@ $languageShort = $langParts[0];
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain($basedir ."/locale");
+setGetTextDomain(GLANCR_ROOT ."/locale");
 
 
-$modules_content = scandir($basedir .'/modules');
+$modules_content = scandir(GLANCR_ROOT .'/modules');
 
 foreach($modules_content as $file) {
-	if(is_dir($basedir .'/modules/' . $file) && $file != '.' && $file != '..') {
+	if(is_dir(GLANCR_ROOT .'/modules/' . $file) && $file != '.' && $file != '..') {
 		$modules_available[] = $file;
 	}
 }
 
-$modules_enabled = file($basedir .'/config/modules_enabled');
+$modules_enabled = file(GLANCR_ROOT .'/config/modules_enabled');
 foreach ($modules_enabled as $module_enabled) {
 	$modules = explode("\t", $module_enabled);
 	(sizeof($modules) > 1) ? $width = 'half' : $width = 'full';
@@ -38,7 +38,7 @@ foreach ($modules_enabled as $module_enabled) {
 		if(trim($module) == '' || !in_array(trim($module), $modules_available)) {
 			echo "<section class=\"module__" . $width. "width placeholdermodule\">\n";
 		} else {
-			setGetTextDomain($basedir ."/modules/" . trim($module) . "/locale");
+			setGetTextDomain(GLANCR_ROOT ."/modules/" . trim($module) . "/locale");
 			echo "<section class=\"module__" . $width. "width " . trim($module) . "module\">\n";
 			echo "<link rel=\"stylesheet\" href=\"../modules/" . trim($module) . "/frontend/styles.css\">\n";
 			echo "<script>";
