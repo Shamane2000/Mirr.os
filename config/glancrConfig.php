@@ -15,8 +15,8 @@ function getConfigValue($key) {
 	
 	if ($result->num_rows > 0) {
 	    //@FIXME: also return GLANCR_DEFAULT if the value is empty, e.g. NULL or empty string
-		if($row = $result->fetch_assoc()) {
-			return $row['value'];
+		if(($row = $result->fetch_assoc()) && (!empty($row['value']))) {
+		    return $row['value'];
 		} else {
 			return 'GLANCR_DEFAULT';
 		}

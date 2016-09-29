@@ -156,22 +156,8 @@ $('#gr-modal-add').on('closed.zf.reveal', function(){
 });
 
 /**
- * Triggers a backend check script to see if there are new module updates available.
- */
-
-function checkForModuleUpdates() {
-    $.ajax({
-        url: "checkModuleUpdates.php",
-        type: "GET",
-        success: function(response) {
-            console.log(response);
-        }
-    });
-}
-
-/**
  * Installs a new module from a given ZIP file.
- * @param moduleZip A valid module ZIP file, @see https://gitlab.com/glancr/modules for documentation.
+ * @param formData A valid module ZIP file, @see https://gitlab.com/glancr/modules for documentation.
  */
 function installModule(formData) {
 
@@ -260,7 +246,7 @@ function updateModules(updates) {
                 type: "POST",
                 data: {type: 'module', name: module.name, version: module.newVersion},
                 success: function(response) {
-                    checkForModuleUpdates();
+                    $.post('setConfigValueAjax.php', {'key' : 'module_updates', 'value': ''});
                     $('#update-notification').html(LOCALE.updatesSuccess).animate({
                         opacity: 0
                     }, 6000, function() {
