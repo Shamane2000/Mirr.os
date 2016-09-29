@@ -21,8 +21,10 @@ deploy-zip:
   script:
     - pwd
   artifacts:
-      paths:
-      - $CI_BUILD_TAG.zip
+    name:
+      -: "$CI_BUILD_TAG"
+    paths:
+      - vendor/
 #  only:
 #    - tags
 
