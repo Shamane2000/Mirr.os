@@ -1,0 +1,26 @@
+stages:
+  - build
+  - deploy
+
+composer-install:
+  stage: build
+  script:
+    - composer install
+
+deploy-zip:
+  stage: deploy
+  script:
+    - zip $CI_BUILD_TAG .
+  artifacts:
+      paths:
+      - target/*.zip
+  only:
+    - tags
+
+# Builds a complete Raspbian image if there's a new tag in the repo.
+#run-build:
+#  stage: deploy-image
+#  script:
+#    - sudo apt-get install xserver-xorg xinit mc matchbox unclutter fbi midori x11-xserver-utils mysql-server apache2 phpMyAdmin php5-curl hostapd dnsmasq
+#  only:
+#    - tags
