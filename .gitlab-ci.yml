@@ -25,8 +25,8 @@ deploy-zip:
   artifacts:
       paths:
       - target/*.zip
-  only:
-    - tags
+#  only:
+#    - tags
 
 # Builds a complete Raspbian image if there's a new tag in the repo.
 #run-build:
