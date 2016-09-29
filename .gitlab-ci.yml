@@ -19,10 +19,9 @@ stages:
 deploy-zip:
   stage: deploy
   script:
-    - pwd
+    - ls -la
   artifacts:
-    name:
-      -: "$CI_BUILD_TAG"
+    name: "$CI_BUILD_TAG"
     paths:
       - vendor/
 #  only:
