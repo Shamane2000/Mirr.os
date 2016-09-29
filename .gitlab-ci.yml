@@ -1,11 +1,17 @@
-stages:
-  - build
-  - deploy
+# Composer stores all downloaded packages in the vendor/ directory.
+# Do not use the following if the vendor/ directory is commited to
+# your git repository.
+cache:
+  paths:
+  - vendor/
 
-composer-install:
-  stage: build
-  script:
-    - composer install
+before_script:
+# Install composer dependencies
+- curl --silent --show-error https://getcomposer.org/installer | php
+- php composer.phar install
+
+stages:
+  - deploy
 
 deploy-zip:
   stage: deploy
@@ -24,3 +30,4 @@ deploy-zip:
 #    - sudo apt-get install xserver-xorg xinit mc matchbox unclutter fbi midori x11-xserver-utils mysql-server apache2 phpMyAdmin php5-curl hostapd dnsmasq
 #  only:
 #    - tags
+
