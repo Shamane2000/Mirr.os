@@ -26,7 +26,7 @@ class GlancrServerApi
         $connectionType = getConfigValue('connectionType');
         // DEBUG
         //$ip = '192.168.1.36';
-        exec('ip -f inet -o addr show ' . $connectionType . '0|cut -d\  -f 7 | cut -d/ -f 1', $ip);
+        $ip = system('ip -f inet -o addr show ' . $connectionType . '0|cut -d\  -f 7 | cut -d/ -f 1');
         return $ip;
     }
 
