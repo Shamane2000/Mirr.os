@@ -277,11 +277,12 @@ function updateSystem() {
                     $(this).text('');
                     $(this).css('opacity',1);
                 });
+                location.reload();
             },
             error: function (response) {
                 $('#system-update-notification').html(LOCALE.internalError + response.responseText)
                 //@TODO: improve error handling: At least show button to retry update or contact devs
             }
-        })
+        });
     }
 }

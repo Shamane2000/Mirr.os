@@ -62,6 +62,7 @@ class SystemUpdater
     function updateSystem() {
         $result = $this->update->update();
         if ($result === true) {
+            setConfigValue('system_updates', '');
             return _("mirr.OS sucessfully updated");
         } else {
             return _("There was an error updating mirr.OS: ") . $result;
