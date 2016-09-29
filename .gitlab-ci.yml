@@ -3,6 +3,7 @@ image: php:5.6
 
 before_script:
 # Install dependencies
+- pwd()
 - bash /builds/glancr/system/ci/docker_install.sh > /dev/null
 # Install composer dependencies
 - curl --silent --show-error https://getcomposer.org/installer | php
