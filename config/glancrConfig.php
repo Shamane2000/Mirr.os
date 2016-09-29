@@ -14,6 +14,7 @@ function getConfigValue($key) {
 	$result = $conn->query('SELECT `value` FROM configuration WHERE `key`="' . $key . '"');
 	
 	if ($result->num_rows > 0) {
+	    //@FIXME: also return GLANCR_DEFAULT if the value is empty, e.g. NULL or empty string
 		if($row = $result->fetch_assoc()) {
 			return $row['value'];
 		} else {
