@@ -19,10 +19,10 @@ stages:
 deploy-zip:
   stage: deploy
   script:
-    - zip $CI_BUILD_TAG .
+    - pwd
   artifacts:
       paths:
-      - target/*.zip
+      - $CI_BUILD_TAG.zip
 #  only:
 #    - tags
 
