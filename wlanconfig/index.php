@@ -5,7 +5,7 @@ $language = getConfigValue('language');
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain($basedir ."/locale");
+setGetTextDomain(GLANCR_ROOT ."/locale");
 
 ?>
 <!DOCTYPE html>
@@ -96,7 +96,7 @@ if($con[0] == 'eth') {
     <section class="row">
     	<div id="languageMenu">
     	<?php 
-	            	$languagesAvailableFile = file($basedir .'/config/languages_available');
+	            	$languagesAvailableFile = file(GLANCR_ROOT .'/config/languages_available');
 					foreach ($languagesAvailableFile as $languageAvailableRow) {
 						$languageParts = explode("\t", $languageAvailableRow);
 						$selected = '';

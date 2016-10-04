@@ -29,7 +29,7 @@ function deleteDir($dirPath)  {
 }
 
 try {
-    deleteDir($basedir .'/modules/' . $_POST['module']);
+    deleteDir(GLANCR_ROOT .'/modules/' . $_POST['module']);
 } catch (Exception $e) {
     http_response_code(500);
     echo $e->getMessage();
@@ -37,16 +37,13 @@ try {
 
 
 if($_POST['action'] == 'delete') {
-	$modulesActive = file($basedir .'/config/modules_enabled');
+	$modulesActive = file(GLANCR_ROOT .'/config/modules_enabled');
 	foreach ($modulesActive as $nr => $row) {
 		$modulesActive[$nr] = str_replace($_POST['module'], '', $row);
 	}
-	$fp = fopen($basedir .'/config/modules_enabled', 'w');
+	$fp = fopen(GLANCR_ROOT .'/config/modules_enabled', 'w');
 	fwrite($fp, implode("", $modulesActive));
 	
 	setConfigValue('reload', '1');
 }
 
-
-
-?>

@@ -6,7 +6,7 @@ $language = getConfigValue('language');
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain($basedir . "/locale");
+setGetTextDomain(GLANCR_ROOT . "/locale");
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,10 +33,10 @@ setGetTextDomain($basedir . "/locale");
 <body>
 <?php 
 $firstname = getConfigValue('firstname');
-$modules_content = scandir($basedir .'/modules');
+$modules_content = scandir(GLANCR_ROOT .'/modules');
 
 foreach($modules_content as $file) {
-	if(is_dir($basedir .'/modules/' . $file) && $file != '.' && $file != '..') {
+	if(is_dir(GLANCR_ROOT .'/modules/' . $file) && $file != '.' && $file != '..') {
 		$modules_available[] = $file;
 	}
 }
@@ -58,7 +58,7 @@ $onServer = array_keys($serverVersions);
 			<table>
 				<?php 
 				foreach($modules_available as $module_available) { 
-					$versionFile = file($basedir .'/modules/' . $module_available . '/version.txt');
+					$versionFile = file(GLANCR_ROOT .'/modules/' . $module_available . '/version.txt');
 					echo "\t\t\t\t<tr><td>$module_available</td><td>" . $versionFile[0] . "</td>";
 					if(array_key_exists($module_available, $serverVersions)) {
 						unset($onServer[array_search($module_available, $onServer)]);

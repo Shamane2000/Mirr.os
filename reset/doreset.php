@@ -45,15 +45,15 @@ $dbname = "glancr";
 $conn = new mysqli($servername, $username, $password, $dbname);
 $result = $conn->query('TRUNCATE TABLE configuration');
 
-$datei = file($basedir .'/config/modules_enabled.default');
-$fp = fopen($basedir .'/config/modules_enabled', 'w');
+$datei = file(GLANCR_ROOT .'/config/modules_enabled.default');
+$fp = fopen(GLANCR_ROOT .'/config/modules_enabled', 'w');
 fwrite($fp, implode("", $datei));
 
 // reinstall deleted default modules
 foreach ($datei as $row) {
 	$modules = explode("\t", $row);
 	foreach($modules as $module) {
-		if(is_dir($basedir .'/modules/' . $module) !== TRUE) {
+		if(is_dir(GLANCR_ROOT .'/modules/' . $module) !== TRUE) {
 			$version = file($apibaseurl . '/update/modules/' . $module . '/version.txt');
 			
 			$url = 'http://localhost/config/installModule.php';

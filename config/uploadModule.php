@@ -11,9 +11,9 @@ if(substr($_FILES['moduleZip']['name'], -4) != '.zip') {
 $za = new ZipArchive();
 
 if($za->open($_FILES['moduleZip']["tmp_name"])) {
-	$za->extractTo($basedir .'/modules/');
+	$za->extractTo(GLANCR_ROOT .'/modules/');
 	
-	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($basedir .'/modules/' . explode('/', $za->statIndex(0)['name'])[0]));
+	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(GLANCR_ROOT .'/modules/' . explode('/', $za->statIndex(0)['name'])[0]));
 	
 	foreach($iterator as $item) {
 		chmod($item, 0777);
