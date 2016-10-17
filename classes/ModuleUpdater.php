@@ -21,7 +21,7 @@ class ModuleUpdater
         $onServer = array_keys($serverVersions);
         foreach($modules_available as $module_available) {
             $infoFile = file_get_contents(GLANCR_ROOT . '/modules/' . $module_available . '/info.json');
-            $infoObject = json_decode($infoFile);
+            $infoObject = json_decode($infoFile, true);
             $localVersion = $infoObject['module']['version'];
 
             if (array_key_exists($module_available, $serverVersions)) {
