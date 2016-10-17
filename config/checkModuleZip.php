@@ -43,7 +43,7 @@ for ($i = 0; $i < $za->numFiles; $i++) {
 				}
 			}
 		} else if($pathParts[1] == 'locales') {
-		} else if($pathParts[1] == 'version.txt') {
+		} else if($pathParts[1] == 'info.json') {
 			$fp = $za->getStream($fullFilePath);
 			if(!$fp) exit("Fehler\n");
 
