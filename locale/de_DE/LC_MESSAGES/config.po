@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mirr.OS v0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 14:26+0200\n"
-"PO-Revision-Date: 2016-09-17 21:00+0200\n"
+"POT-Creation-Date: 2016-10-17 20:13+0200\n"
+"PO-Revision-Date: 2016-10-17 20:14+0200\n"
 "Last-Translator: gorbo <info@gorbo.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -34,81 +34,116 @@ msgstr "404 - Webseite nicht gefunden!"
 msgid "back to setup"
 msgstr "Zurück zur Konfigurationsseite"
 
+#: classes/SystemUpdater.php:66
+msgid "mirr.OS sucessfully updated"
+msgstr "mirr.OS erfolgreich aktualisiert"
+
+#: classes/SystemUpdater.php:68
+msgid "There was an error updating mirr.OS: "
+msgstr "Es gab einen Fehler bei der Aktualisierung von mirr.OS: "
+
 #: config/index.php:17 config/manageModules.php:16
 msgid "module overview"
 msgstr "Modulübersicht"
 
-#: config/index.php:74 config/index.php:123 config/index.php:159
-#: config/index.php:231 config/index.php:264
+#: config/index.php:87 config/index.php:152 config/index.php:188
+#: config/index.php:261 config/index.php:299
 msgid "_title"
 msgstr ""
 
-#: config/index.php:85 config/manageModules.php:56
+#: config/index.php:98 config/manageModules.php:56
 msgid "hi"
 msgstr "Hi"
 
-#: config/index.php:86
+#: config/index.php:99
 msgid "setup modules"
 msgstr "Module einrichten"
 
-#: config/index.php:88
+#: config/index.php:101
 msgid "basic setup back link"
 msgstr ""
 "Hier kannst du deine <a href=\"../wlanconfig/\">Grundeinstellungen</a> "
 "(Sprache, WLAN, E-Mail, Name, ...) ändern"
 
-#: config/index.php:191
+#: config/index.php:107
+msgid "We made some changes."
+msgstr "Wir haben ein paar Änderungen vorgenommen."
+
+#: config/index.php:108
+msgid "Update modules now"
+msgstr "Module jetzt aktualisieren"
+
+#: config/index.php:115
+msgid "Update system now"
+msgstr "System jetzt aktualisieren"
+
+#: config/index.php:220
 msgid "config module's width"
 msgstr "Modulbreite einstellen"
 
-#: config/index.php:195
+#: config/index.php:224
 msgid "half width"
 msgstr "Halbe Breite"
 
-#: config/index.php:196
+#: config/index.php:225
 msgid "full width"
 msgstr "Ganze Breite"
 
-#: config/index.php:207
+#: config/index.php:236
 msgid "add new module"
 msgstr "Neues Modul hinzufügen"
 
-#: config/index.php:210
+#: config/index.php:239
 msgid "find modules"
 msgstr "Module finden"
 
-#: config/index.php:211
+#: config/index.php:240
 msgid "install modules"
 msgstr "Module installieren"
 
-#: config/index.php:232
+#: config/index.php:262
 msgid "_description"
 msgstr ""
 
-#: config/index.php:245
-msgid "delete"
-msgstr "löschen"
-
-#: config/index.php:246
+#: config/index.php:280
 msgid "cancel"
 msgstr "abbrechen"
 
-#: config/index.php:295
+#: config/index.php:281
+msgid "delete"
+msgstr "löschen"
+
+#: config/index.php:334
 msgid "module deleted"
 msgstr "Modul wurde gelöscht"
 
-#: config/index.php:296 config/manageModules.php:206
+#: config/index.php:335 config/manageModules.php:206
 msgid "not a zip file"
 msgstr "keine ZIP-Datei"
 
-#: config/index.php:297
+#: config/index.php:336
 msgid "really overwrite module?"
 msgstr "Modul wirklich überschreiben?"
 
+#: config/index.php:337
+msgid "there was a server error: "
+msgstr "Es gab einen Server-Fehler: "
+
+#: config/index.php:338
+msgid "do you really want to update all modules?"
+msgstr "Willst du wirkliche alle Module aktualisieren?"
+
+#: config/index.php:339
+msgid "do you really want to update mirr.OS?"
+msgstr "Willst du mirr.OS wirklich aktualisieren?"
+
+#: config/index.php:340
+msgid "all updates were successful!"
+msgstr "Alle Aktualisierungen waren erfolgreich!"
+
 #: config/manageModules.php:57
-#, fuzzy
 msgid "manage modules"
-msgstr "Neues Modul hinzufügen"
+msgstr "Module verwalten"
 
 #: config/manageModules.php:82
 #, fuzzy
@@ -123,16 +158,15 @@ msgstr "ZIP-Datei des Moduls"
 
 #: config/manageModules.php:105
 msgid "really delete module"
-msgstr ""
+msgstr "Modul wirklich löschen"
 
 #: config/manageModules.php:125
-#, fuzzy
 msgid "really update module"
-msgstr "Module einrichten"
+msgstr "Modul wirklich aktualisieren"
 
 #: config/manageModules.php:147
 msgid "really overwrite module"
-msgstr ""
+msgstr "Modul wirklich überschreiben"
 
 #: nonet.php:66 nonet.php:68 nonet.php:70 nonet.php:72
 msgid "connecting"
