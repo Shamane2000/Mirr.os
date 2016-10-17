@@ -1,6 +1,6 @@
 {
   "name": "glancr-system",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "update_url": "https://api.glancr.de/update/system",
   "last_update": "2016-09-31"
 }
