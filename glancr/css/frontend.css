@@ -151,7 +151,7 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis; 
-  max-height:55px;}
+  max-height:56px;}
 
 [class^="newsmodule__source"]:before {
   display: inline-block;
