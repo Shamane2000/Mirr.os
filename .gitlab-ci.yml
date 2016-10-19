@@ -11,16 +11,18 @@ before_script:
     # Install composer dependencies
     - curl --silent --show-error https://getcomposer.org/installer | php
     - php composer.phar install
+    - find . -type d | grep .git | xargs rm -rf
 
 stages:
   - deploy
 
-create-artifact:
+release-zip:
   stage: deploy
   environment: production
   script:
     - ls -la
     - chown -R www-data:www-data .
+    - php -r '$infoFile = json_decode(file_get_contents("info.json")); $infoFile->version = $argv[1]; $infoFile->last_update = $argv[2]; file_put_contents("info.json", json_encode($infoFile, JSON_PRETTY_PRINT));' -- "$CI_BUILD_TAG" "$(date)"
   artifacts:
     name: "$CI_BUILD_TAG"
     paths:
