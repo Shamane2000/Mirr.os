@@ -23,6 +23,7 @@ release-zip:
     - ls -la
     - chown -R www-data:www-data .
     - php -r '$infoFile = json_decode(file_get_contents("info.json")); $infoFile->version = $argv[1]; $infoFile->last_update = $argv[2]; file_put_contents("info.json", json_encode($infoFile, JSON_PRETTY_PRINT));' -- "$CI_BUILD_TAG" "$(date)"
+    - find . -type f | grep ".gitkeep" | xargs rm
   artifacts:
     name: "$CI_BUILD_TAG"
     paths:
