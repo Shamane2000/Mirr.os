@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4906857fffaf7671b2daed6e8cffecd1",
-    "content-hash": "a1948ab0d945a428eea4084a875c5500",
+    "hash": "4acef5a639fdbdc02527deb28a311e7c",
+    "content-hash": "6a50af0d507aaaa75c90b8d4469e74bf",
     "packages": [
         {
             "name": "desarrolla2/cache",
@@ -64,16 +64,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.18.2",
+            "version": "1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09"
+                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/064b38c16790249488e7a8b987acf1c9d7383c09",
-                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f42fbdfd53e306bda545845e4dbfd3e72edb4952",
+                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952",
                 "shasum": ""
             },
             "require": {
@@ -92,8 +92,8 @@
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
-                "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
                 "swiftmailer/swiftmailer": "~5.3"
             },
             "suggest": {
@@ -105,9 +105,9 @@
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
-                "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
             },
             "type": "library",
             "extra": {
@@ -138,20 +138,20 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-04-02 13:12:58"
+            "time": "2016-07-29 03:23:52"
         },
         {
             "name": "psr/log",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0"
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/5277094ed527a1c4477177d102fe4c53551953e0",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
                 "shasum": ""
             },
             "require": {
@@ -185,7 +185,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-09-19 16:02:08"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "vierbergenlars/php-semver",
@@ -241,26 +241,26 @@
         },
         {
             "name": "visualappeal/php-auto-update",
-            "version": "dev-master",
+            "version": "0.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VisualAppeal/PHP-Auto-Update.git",
-                "reference": "192a07860d21d9556bccc05c75e085e3518bd3bc"
+                "reference": "2853884c8665b60c6557529d026c2a2122877463"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VisualAppeal/PHP-Auto-Update/zipball/192a07860d21d9556bccc05c75e085e3518bd3bc",
-                "reference": "192a07860d21d9556bccc05c75e085e3518bd3bc",
+                "url": "https://api.github.com/repos/VisualAppeal/PHP-Auto-Update/zipball/2853884c8665b60c6557529d026c2a2122877463",
+                "reference": "2853884c8665b60c6557529d026c2a2122877463",
                 "shasum": ""
             },
             "require": {
                 "desarrolla2/cache": "2.1.*",
-                "monolog/monolog": "1.18.*",
+                "monolog/monolog": "1.21.*",
                 "php": ">= 5.5.9",
                 "vierbergenlars/php-semver": "3.0.*"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.5.*"
+                "phpunit/phpunit": "4.8.*"
             },
             "type": "library",
             "autoload": {
@@ -279,15 +279,13 @@
                 }
             ],
             "description": "Autoupdater for PHP",
-            "time": "2016-09-18 15:52:04"
+            "time": "2016-10-20 05:28:32"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "visualappeal/php-auto-update": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

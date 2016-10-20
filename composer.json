@@ -1,6 +1,6 @@
 {
     "require": {
-        "visualappeal/php-auto-update": "dev-master"
+        "visualappeal/php-auto-update": "^0.9.3"
     },
     "autoload": {
         "psr-4": {"glancr\\": "classes/"}
