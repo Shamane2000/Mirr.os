@@ -8,6 +8,7 @@ before_script:
     # Install git (the php image doesn't have it) which is required by composer
     - apt-get update -yqq
     - apt-get install git -yqq
+    - apt-get install zip unzip -yqq
     # Install composer dependencies
     - curl --silent --show-error https://getcomposer.org/installer | php
     - php composer.phar install
