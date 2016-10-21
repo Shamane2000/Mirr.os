@@ -40,4 +40,4 @@ system
 |- index.php <- redirect auf config/
 |- info.json <- mirr.OS-Versionsnummer usw.
 |- nonet.php <- Template für den initialen Einrichtungsprozess oder falls keine (W)LAN-Verbindung besteht
-``
+```

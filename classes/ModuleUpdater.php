@@ -37,11 +37,11 @@ class ModuleUpdater
         }
         if (!empty($updates_available)) {
             error_log("Module updates available: " . print_r($updates_available, true));
-            if (unserialize(getConfigValue('module_updates')) === $updates_available) {
+            if (@unserialize(getConfigValue('module_updates')) === $updates_available) {
                 return;
             } else {
                 setConfigValue('module_updates', serialize($updates_available));
-                $api = new glancrServerApi(GLANCR_API_BASE);
+                $api = new GlancrServerApi(GLANCR_API_BASE);
                 $result = $api->triggerMail('update');
                 error_log($result);
             }
