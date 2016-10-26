@@ -37,6 +37,7 @@ body {
 
 [class$="module"] {
   max-height: 280px;
+  height: 280px;
   margin-bottom: 50px;
   padding: 0 15px; }
   [class$="module"] ul {
