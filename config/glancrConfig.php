@@ -12,17 +12,13 @@ function getConfigValue($key) {
 	
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$result = $conn->query('SELECT `value` FROM configuration WHERE `key`="' . $key . '"');
-	
-	if ($result->num_rows > 0) {
-	    //@FIXME: also return GLANCR_DEFAULT if the value is empty, e.g. NULL or empty string
-		if(($row = $result->fetch_assoc()) && (!empty($row['value']))) {
-		    return $row['value'];
-		} else {
-			return 'GLANCR_DEFAULT';
-		}
-	} else {
-		return 'GLANCR_DEFAULT';
-	}
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['value'];
+    } else {
+        return null;
+    }
 }
 
 function setConfigValue($key, $value) {

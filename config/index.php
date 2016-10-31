@@ -44,13 +44,13 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
 $firstname = getConfigValue('firstname');
 $modules_content = scandir(GLANCR_ROOT .'/modules');
 
-if (getConfigValue('module_updates') !== 'GLANCR_DEFAULT') {
+if (!empty(getConfigValue('module_updates'))) {
     $updates_available = unserialize(getConfigValue('module_updates'));
 } else {
     $updates_available = [];
 }
 
-if (getConfigValue('system_updates') !== 'GLANCR_DEFAULT') {
+if (!empty(getConfigValue('system_updates'))) {
     $system_updates_available = getConfigValue('system_updates');
 } else {
     $system_updates_available = null;
