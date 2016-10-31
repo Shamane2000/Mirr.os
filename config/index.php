@@ -254,8 +254,8 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                     <div class="modulepicker__choosebox">
                         <a href="#" class="chooseModule">
                             <input type="hidden" name="newModulId" class="newModulId" value="<?php echo $module_available;?>">
-                            <div class="small-3 columns">
-                                <img width="55" height="55" style="background-color: #ddd;" src="../modules/<?php echo $module_available;?>/assets/icon.svg" alt="logo" />
+                            <div class="small-3 columns modulepicker__imgwrap">
+                                <img width="100" height="100" src="../modules/<?php echo $module_available;?>/assets/icon.svg" alt="logo" />
                             </div>
                             <div class="small-9 columns">
                                 <h6><?php echo _($module_available . '_title');?></h6>

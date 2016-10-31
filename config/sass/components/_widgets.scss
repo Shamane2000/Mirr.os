@@ -100,8 +100,7 @@ main {
             border-top: none;
         }
         img {
-            margin-top: rem-calc(3px);
-            margin-bottom: $global-margin;
+            max-width: none;
         }
     }
     .chooseModule, .fi-trash {
@@ -139,6 +138,20 @@ main {
         i {
             vertical-align: middle;
             margin-left: $global-margin;
+        }
+    }
+
+    .modulepicker__imgwrap {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        img {
+            position: absolute;
+            left: 0;
+            top: -20px;
+            height: 110px;
+            width: auto;
         }
     }
 }

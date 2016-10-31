@@ -4124,7 +4124,6 @@ table.hover tr:nth-of-type(even):hover {
 .instruction__text {
   margin-bottom: 1.25rem;
   -webkit-hyphens: auto;
-     -moz-hyphens: auto;
       -ms-hyphens: auto;
           hyphens: auto; }
 
@@ -4204,15 +4203,12 @@ main {
 
 .block__add {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
@@ -4227,20 +4223,16 @@ main {
   margin-right: 0.625rem;
   padding: 1rem;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
   -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center; }
   .module [class^="fi-"] {
@@ -4281,8 +4273,7 @@ main {
     .reveal .small-up-1 > .column:first-of-type, .reveal .small-up-1 > .columns:first-of-type {
       border-top: none; }
     .reveal .small-up-1 > .column img, .reveal .small-up-1 > .columns img {
-      margin-top: 0.1875rem;
-      margin-bottom: 1rem; }
+      max-width: none; }
   .reveal .chooseModule, .reveal .fi-trash {
     color: initial; }
 
@@ -4291,25 +4282,20 @@ main {
 
 .flex-row {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
   .flex-row .modulepicker__choosebox {
     width: 90%; }
   .flex-row .modulepicker__deletebox {
     width: 10%;
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-    -webkit-justify-content: center;
         -ms-flex-pack: center;
             justify-content: center; }
   .flex-row .modulepicker__confirmdelete {
@@ -4317,29 +4303,35 @@ main {
     display: none; }
   .flex-row .modulepicker__confirmdelete--inner {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-justify-content: space-around;
-        -ms-flex-pack: distribute;
-            justify-content: space-around; }
+    -ms-flex-pack: distribute;
+        justify-content: space-around; }
     .flex-row .modulepicker__confirmdelete--inner .button {
       width: 45%; }
     .flex-row .modulepicker__confirmdelete--inner i {
       vertical-align: middle;
       margin-left: 1rem; }
+  .flex-row .modulepicker__imgwrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden; }
+    .flex-row .modulepicker__imgwrap img {
+      position: absolute;
+      left: 0;
+      top: -20px;
+      height: 110px;
+      width: auto; }
 
 .moduleManager {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
   .moduleManager .button {
     width: 45%; }
 
