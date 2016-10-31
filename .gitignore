@@ -4,3 +4,4 @@ wlans.txt
 /vendor
 /cache
 /update.log
+/config/modules_enabled
