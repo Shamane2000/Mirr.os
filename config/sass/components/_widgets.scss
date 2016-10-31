@@ -153,6 +153,17 @@ main {
             height: 110px;
             width: auto;
         }
+
+        @include breakpoint(small only) {
+            max-width: 100%;
+            position: absolute;
+            width: 80px;
+            height: 80px;
+
+            img {
+                height: 80px;
+            }
+        }
     }
 }
 
