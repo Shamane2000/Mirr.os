@@ -15,6 +15,16 @@ $spin-duration: 1s;
 .loading__button {
   min-width: 7rem;
   max-height: 2.5rem;
+  position: absolute;
+  left: 0;
+  top: 0
+}
+
+.loading__button--inline {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  margin: 0 15px;
 }
 
 .loading__button--inner {
@@ -27,4 +37,13 @@ $spin-duration: 1s;
   margin: 0 auto;
   position: relative;
   top: -7px;
+}
+
+#system-update-notification.loading {
+  display: flex;
+  position: relative;
+
+  button {
+    min-width: 60%;
+  }
 }

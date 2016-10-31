@@ -337,6 +337,7 @@ foreach ($modules_available AS $module_available) {
                 "internalError" => _('there was a server error: '),
                 "confirmModuleUpdates" => _('do you really want to update all modules?'),
                 "confirmSystemUpdate" => _('do you really want to update mirr.OS?'),
+                "updatingSystemMessage" => _('downloading and installing system update ...'),
                 "updatesSuccess" => _('all updates were successful!')
             ]
         ) . ";"

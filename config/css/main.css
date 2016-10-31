@@ -4171,7 +4171,16 @@ input:focus:not(:placeholder-shown) + label {
             transform: rotate(360deg); } }
 .loading__button {
   min-width: 7rem;
-  max-height: 2.5rem; }
+  max-height: 2.5rem;
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.loading__button--inline {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  margin: 0 15px; }
 
 .loading__button--inner {
   border-radius: 50%;
@@ -4184,6 +4193,14 @@ input:focus:not(:placeholder-shown) + label {
   margin: 0 auto;
   position: relative;
   top: -7px; }
+
+#system-update-notification.loading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative; }
+  #system-update-notification.loading button {
+    min-width: 60%; }
 
 main {
   padding-bottom: 1rem; }

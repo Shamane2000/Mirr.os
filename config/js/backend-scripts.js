@@ -264,8 +264,11 @@ function updateModules(updates) {
 }
 
 function updateSystem() {
-
     if (window.confirm(LOCALE.confirmSystemUpdate)) {
+        var updateSystemDiv = $('#system-update-notification');
+        updateSystemDiv.addClass('loading');
+        updateSystemDiv.html('<button class="button">' + LOCALE.updatingSystemMessage + '<div class="loading__button--inline"><div class="loading__button--inner"></div></div></button>');
+
         $.ajax({
             url: "runUpdate.php",
             type: "POST",
