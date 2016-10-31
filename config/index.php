@@ -64,7 +64,13 @@ foreach($modules_content as $file) {
 	}
 }
 
+if (!file_exists(GLANCR_ROOT .'/config/modules_enabled')) {
+    $defaults = file(GLANCR_ROOT .'/config/modules_enabled.default');
+    $fp = fopen(GLANCR_ROOT .'/config/modules_enabled', 'w');
+    fwrite($fp, implode("", $defaults));
+}
 $modules_enabled = file(GLANCR_ROOT .'/config/modules_enabled');
+
 ?>
 <script type="text/javascript">
 var modules = [];
