@@ -69,7 +69,7 @@ if(!$status[0]) {
 	while(curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200) {
 		$result = curl_exec($ch);
 		$mailTries++;
-		usleep(1000000);
+		usleep(5000000);
 		if($mailTries == 20) {
 			setConfigValue('connectionType', 'wlan');
 			setConfigValue('emailNotSent', '1');
