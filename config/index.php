@@ -110,14 +110,24 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                 // Output update button if there are updates available for an installed module. Module names are passed to JS in bottom script tag.
                 if(sizeof($updates_available) > 0) : ?>
                     <div id="update-notification">
-                        <p><?php echo _("We made some changes.") ?></p>
+                        <p><?php echo _("We made some changes. The following modules can be updated:"); ?></p>
+                        <ul>
+                            <?php
+                                foreach ($updates_available as $update) {
+                                    $update_module_name = $update['name'];
+                                    bindtextdomain($update_module_name, GLANCR_ROOT ."/modules/$update_module_name/locale");
+                                    bind_textdomain_codeset('UTF-8', $update_module_name);
+                                    echo '<li>' . sprintf(_('%s: update to version %s'), dgettext($update_module_name, $update_module_name . '_title'), $update['newVersion']) . '</li>';
+                                }
+                            ?>
+                        </ul>
                         <p><button class="button" onclick='updateModules(<?php echo json_encode($updates_available); ?>)'><?php echo _("Update modules now") ?></button></p>
                     </div>
                     <?php
                 endif;
                 if(!empty($system_updates_available)) : ?>
                     <div id="system-update-notification">
-                        <p><?php echo _("There's a system update available for your Glancr: Version $system_updates_available") ?></p>
+                        <p><?php echo sprintf(_("There's a system update available for your Glancr: Version %s"), $system_updates_available) ?></p>
                         <p><button class="button" onclick='updateSystem()'><?php echo _("Update system now") ?></button></p>
                 <?php
                     endif;
@@ -255,6 +265,7 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
  <?php 
  foreach ($modules_available AS $module_available) { 
  	setGetTextDomain(GLANCR_ROOT ."/modules/$module_available/locale");
+     $module_version = json_decode(file_get_contents(GLANCR_ROOT ."/modules/$module_available/info.json"))->module->version;
  ?>           
                 <section class="column module-<?php echo $module_available;?> flex-row">
                     <div class="modulepicker__choosebox">
@@ -264,8 +275,9 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                                 <img width="100" height="100" src="../modules/<?php echo $module_available;?>/assets/icon.svg" alt="logo" />
                             </div>
                             <div class="small-9 columns">
-                                <h6><?php echo _($module_available . '_title');?></h6>
+                                <h6><?php echo _($module_available . '_title');?><span class="modulepicker__version">(<?php echo $module_version; ?>)</span></h6>
                                 <p><?php echo _($module_available . '_description');?></p>
+
                             </div>
                         </a>
                     </div>
@@ -323,6 +335,9 @@ foreach ($modules_available AS $module_available) {
     </section>
 
 </main>
+<footer>
+
+</footer>
 
 <script type="text/javascript" src="bower_components/foundation-sites/dist/foundation.min.js"></script>
 <script type="text/javascript" src="bower_components/foundation-sites/js/foundation.util.mediaQuery.js"></script>

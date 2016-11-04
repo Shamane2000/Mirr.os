@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mirr.OS v0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-31 19:23+0100\n"
-"PO-Revision-Date: 2016-10-31 19:24+0100\n"
+"POT-Creation-Date: 2016-11-04 12:01+0100\n"
+"PO-Revision-Date: 2016-11-04 12:01+0100\n"
 "Last-Translator: gorbo <info@gorbo.de>\n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -46,106 +46,116 @@ msgstr "There was an error updating mirr.OS: "
 msgid "module overview"
 msgstr "Module overview"
 
-#: config/index.php:87 config/index.php:152 config/index.php:188
-#: config/index.php:261 config/index.php:299
+#: config/index.php:93 config/index.php:120 config/index.php:168
+#: config/index.php:204 config/index.php:278 config/index.php:317
 msgid "_title"
 msgstr ""
 
-#: config/index.php:98 config/manageModules.php:56
+#: config/index.php:104 config/manageModules.php:56
 msgid "hi"
 msgstr "Hi"
 
-#: config/index.php:99
+#: config/index.php:105
 msgid "setup modules"
 msgstr "Setup modules"
 
-#: config/index.php:101
+#: config/index.php:107
 msgid "basic setup back link"
 msgstr ""
 "This is where you can change <a href=\"../wlanconfig/\">your basic settings</"
 "a> (language, wifi, email, name...)"
 
-#: config/index.php:107
-msgid "We made some changes."
-msgstr "We made some changes."
+#: config/index.php:113
+msgid "We made some changes. The following modules can be updated:"
+msgstr ""
 
-#: config/index.php:108
+#: config/index.php:120
+#, php-format
+msgid "%s: update to version %s"
+msgstr ""
+
+#: config/index.php:124
 msgid "Update modules now"
 msgstr ""
 
-#: config/index.php:115
+#: config/index.php:130
+#, php-format
+msgid "There's a system update available for your Glancr: Version %s"
+msgstr ""
+
+#: config/index.php:131
 msgid "Update system now"
 msgstr ""
 
-#: config/index.php:220
+#: config/index.php:236
 msgid "config module's width"
 msgstr "Config module's width."
 
-#: config/index.php:224
+#: config/index.php:240
 msgid "half width"
 msgstr "Half width"
 
-#: config/index.php:225
+#: config/index.php:241
 msgid "full width"
 msgstr "Full width"
 
-#: config/index.php:236
+#: config/index.php:252
 msgid "add new module"
 msgstr "Add new module"
 
-#: config/index.php:239
+#: config/index.php:255
 #, fuzzy
 msgid "find modules"
 msgstr "Setup modules"
 
-#: config/index.php:240
+#: config/index.php:256
 #, fuzzy
 msgid "install modules"
 msgstr "Setup modules"
 
-#: config/index.php:262
+#: config/index.php:279
 #, fuzzy
 msgid "_description"
 msgstr "Latest news from newsfeeds."
 
-#: config/index.php:280
+#: config/index.php:298
 msgid "cancel"
 msgstr ""
 
-#: config/index.php:281
+#: config/index.php:299
 msgid "delete"
 msgstr ""
 
-#: config/index.php:334
+#: config/index.php:355
 #, fuzzy
 msgid "module deleted"
 msgstr "Module overview"
 
-#: config/index.php:335 config/manageModules.php:206
+#: config/index.php:356 config/manageModules.php:206
 msgid "not a zip file"
 msgstr ""
 
-#: config/index.php:336
+#: config/index.php:357
 msgid "really overwrite module?"
 msgstr ""
 
-#: config/index.php:337
+#: config/index.php:358
 msgid "there was a server error: "
 msgstr ""
 
-#: config/index.php:338
+#: config/index.php:359
 msgid "do you really want to update all modules?"
 msgstr ""
 
-#: config/index.php:339
+#: config/index.php:360
 msgid "do you really want to update mirr.OS?"
 msgstr ""
 
-#: config/index.php:340
+#: config/index.php:361
 msgid "downloading and installing system update ..."
 msgstr ""
 
-#: config/index.php:341
+#: config/index.php:362
 msgid "all updates were successful!"
 msgstr ""
 
@@ -311,6 +321,9 @@ msgstr ""
 "email containing links for further configuration. The internal wifi GlancrAP "
 "is now shut down. Please reconnect with your personal wifi. Please consider "
 "the edition of your smart mirror."
+
+#~ msgid "We made some changes."
+#~ msgstr "We made some changes."
 
 #~ msgid "person setup text"
 #~ msgstr "Please enter your name and email address."

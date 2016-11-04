@@ -140,6 +140,10 @@ main {
             margin-left: $global-margin;
         }
     }
+    .modulepicker__version {
+        margin-left: 0.5rem;
+        color: grey;
+    }
 
     .modulepicker__imgwrap {
         position: relative;
