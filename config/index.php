@@ -2,11 +2,47 @@
 include('glancrConfig.php');
 
 $language = getConfigValue('language');
+$firstname = getConfigValue('firstname');
 
 putenv("LANG=$language");
-setlocale(LC_ALL, $language . '.utf8');
+setlocale(LC_ALL, "$language.UTF-8");
+bindtextdomain('config', GLANCR_ROOT ."/locale");
+textdomain('config');
+bind_textdomain_codeset('config', 'UTF-8');
 
-setGetTextDomain(GLANCR_ROOT ."/locale");
+
+$modules_content = scandir(GLANCR_ROOT .'/modules');
+$modules_available = [];
+
+// Add valid modules to the list of available modules and register their text domain.
+foreach($modules_content as $file) {
+    if(is_dir(GLANCR_ROOT .'/modules/' . $file) && $file != '.' && $file != '..') {
+        $modules_available[] = $file;
+        bindtextdomain("$file", GLANCR_ROOT ."/modules/$file/locale");
+        bind_textdomain_codeset("$file", 'UTF-8');
+    }
+}
+
+// Check and optionally create modules_enabled file.
+if (!file_exists(GLANCR_ROOT .'/config/modules_enabled')) {
+    $defaults = file(GLANCR_ROOT .'/config/modules_enabled.default');
+    $fp = fopen(GLANCR_ROOT .'/config/modules_enabled', 'w');
+    fwrite($fp, implode("", $defaults));
+}
+$modules_enabled = file(GLANCR_ROOT .'/config/modules_enabled');
+
+// Check if there are updates available for modules or mirr.OS.
+if (!empty(getConfigValue('module_updates'))) {
+    $updates_available = unserialize(getConfigValue('module_updates'));
+} else {
+    $updates_available = [];
+}
+
+if (!empty(getConfigValue('system_updates'))) {
+    $system_updates_available = getConfigValue('system_updates');
+} else {
+    $system_updates_available = null;
+}
 
 ?>
 <!DOCTYPE html>
@@ -40,60 +76,25 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
         <img src="assets/glancr_logo.png" width="57" height="30" alt="GLANCR Logo" srcset="assets/glancr_logo.png 57w, assets/glancr_logo@2x.png 114w, assets/glancr_logo@2x.png 171w">
     </div>
 </header>
-<?php 
-$firstname = getConfigValue('firstname');
-$modules_content = scandir(GLANCR_ROOT .'/modules');
 
-if (!empty(getConfigValue('module_updates'))) {
-    $updates_available = unserialize(getConfigValue('module_updates'));
-} else {
-    $updates_available = [];
-}
-
-if (!empty(getConfigValue('system_updates'))) {
-    $system_updates_available = getConfigValue('system_updates');
-} else {
-    $system_updates_available = null;
-}
-
-$modules_available = [];
-
-foreach($modules_content as $file) {
-	if(is_dir(GLANCR_ROOT .'/modules/' . $file) && $file != '.' && $file != '..') {
-		$modules_available[] = $file;
-	}
-}
-
-if (!file_exists(GLANCR_ROOT .'/config/modules_enabled')) {
-    $defaults = file(GLANCR_ROOT .'/config/modules_enabled.default');
-    $fp = fopen(GLANCR_ROOT .'/config/modules_enabled', 'w');
-    fwrite($fp, implode("", $defaults));
-}
-$modules_enabled = file(GLANCR_ROOT .'/config/modules_enabled');
-
-?>
 <script type="text/javascript">
 var modules = [];
 var moduleNames = {};
 var modulesInUse = [];
-<?php 
+
+<?php
+// Assign module slots according to modules_enabled file.
 for($i = 0; $i < 6; $i++) {
-    //@FIXME: This throws "undefined offset" notices for full-width modules.
-	$modules = explode("\t", substr($modules_enabled[$i], 0, -1));
-	echo  "modules[$i] = [];\n";
-	foreach ($modules AS $key => $module) {
-		echo "modules[$i][$key] = '$module';\n";
-		echo "modulesInUse.push('$module');\n";
-	}
+    $modules = explode("\t", substr($modules_enabled[$i], 0, -1));
+    echo  "modules[$i] = [];\n";
+    foreach ($modules AS $key => $module) {
+        echo "modules[$i][$key] = '$module';\n";
+        echo "modulesInUse.push('$module');\n";
+    }
 }
-
 foreach($modules_available as $module_available) {
-	setGetTextDomain(GLANCR_ROOT ."/modules/$module_available/locale");
-	
-	echo "moduleNames['" . $module_available . "'] = '" . _($module_available . '_title') . "';\n";
+    echo "moduleNames['" . $module_available . "'] = '" . dgettext("$module_available", "$module_available" .'_title') . "';\n";
 }
-
-setGetTextDomain(GLANCR_ROOT ."/locale");
 ?>
 </script>
 
@@ -117,7 +118,7 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                                     $update_module_name = $update['name'];
                                     bindtextdomain($update_module_name, GLANCR_ROOT ."/modules/$update_module_name/locale");
                                     bind_textdomain_codeset('UTF-8', $update_module_name);
-                                    echo '<li>' . sprintf(_('%s: update to version %s'), dgettext($update_module_name, $update_module_name . '_title'), $update['newVersion']) . '</li>';
+                                    echo '<li>' . sprintf(_('%s: update to version %s'), dgettext("$update_module_name", $update_module_name . '_title'), $update['newVersion']) . '</li>';
                                 }
                             ?>
                         </ul>
@@ -159,13 +160,12 @@ for($i = 0; $i < 6; $i++) {
                         <div class="block__add">
 <?php 
 		if(strlen($modules[0]) > 0 && in_array($modules[0], $modules_available)) {
-			setGetTextDomain(GLANCR_ROOT ."/modules/" . $modules[0] . "/locale");
-?>                        
+?>
                             <div class="module">
                                 <button class="module__edit" data-open="gr-modal-<?php echo $modules[0];?>">
                                     <i class="fi-pencil"></i>
                                 </button>
-                                <span class="module__title"><?php echo _($modules[0] . '_title');?></span>
+                                <span class="module__title"><?php echo dgettext($modules[0], $modules[0] . '_title');?></span>
                                 <button class="module__delete" href="#">
                                     <i class="fi-trash"></i>
                                 </button>
@@ -194,14 +194,12 @@ for($i = 0; $i < 6; $i++) {
                         <div class="block__add">
                             <?php 
 	if(strlen($nextModule) > 0 && in_array($nextModule, $modules_available)) {
-		setGetTextDomain(GLANCR_ROOT ."/modules/$nextModule/locale");
-		
 ?>                        
                             <div class="module">
                                 <button class="module__edit" data-open="gr-modal-<?php echo $nextModule;?>">
                                     <i class="fi-pencil"></i>
                                 </button>
-                                <span class="module__title"><?php echo _($nextModule . '_title');?></span>
+                                <span class="module__title"><?php echo dgettext($nextModule, $nextModule . '_title');?></span>
                                 <button class="module__delete" href="#">
                                     <span class="fi-trash"></span>
                                 </button>
@@ -222,7 +220,6 @@ for($i = 0; $i < 6; $i++) {
         </div>
 <?php 
 }
-setGetTextDomain(GLANCR_ROOT ."/locale");
 ?>
    </section>
 
@@ -264,7 +261,6 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                         	
  <?php 
  foreach ($modules_available AS $module_available) { 
- 	setGetTextDomain(GLANCR_ROOT ."/modules/$module_available/locale");
      $module_version = json_decode(file_get_contents(GLANCR_ROOT ."/modules/$module_available/info.json"))->module->version;
  ?>           
                 <section class="column module-<?php echo $module_available;?> flex-row">
@@ -275,8 +271,8 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                                 <img width="100" height="100" src="../modules/<?php echo $module_available;?>/assets/icon.svg" alt="logo" />
                             </div>
                             <div class="small-9 columns">
-                                <h6><?php echo _($module_available . '_title');?><span class="modulepicker__version">(<?php echo $module_version; ?>)</span></h6>
-                                <p><?php echo _($module_available . '_description');?></p>
+                                <h6><?php echo dgettext($module_available, $module_available . '_title');?><span class="modulepicker__version">(<?php echo $module_version; ?>)</span></h6>
+                                <p><?php echo dgettext($module_available, $module_available . '_description');?></p>
 
                             </div>
                         </a>
@@ -290,11 +286,6 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
                     </div>
                     <div class="modulepicker__confirmdelete" data-deleteModule-confirmbox="<?php echo $module_available ?>">
                         <div class="modulepicker__confirmdelete--inner">
-
-                            <?php
-                                setGetTextDomain(GLANCR_ROOT ."/locale");
-                            ?>
-
                             <button type="button" class="alert button" data-deleteModule-cancel="<?php echo $module_available ?>"><?php echo _("cancel") ?><i class="fi-x"></i></button>
                             <button type="button" class="success button" data-deleteModule-confirm="<?php echo $module_available ?>"><?php echo _("delete") ?><i class="fi-check"></i></button>
                         </div>
@@ -307,16 +298,17 @@ setGetTextDomain(GLANCR_ROOT ."/locale");
         </div>
 <?php 
 foreach ($modules_available AS $module_available) { 
-	setGetTextDomain(GLANCR_ROOT ."/modules/$module_available/locale");
 	echo "<link rel=\"stylesheet\" href=\"../modules/" . $module_available . "/backend/styles.css\">\n";
 ?>
 <div class="large reveal" data-reveal id="gr-modal-<?php echo $module_available;?>" data-animation-in="fade-in" data-animation-out="fade-out" tabindex="1" role="dialog">
             <button class="close-button" data-close aria-label="Close modal" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <h5 class="text-center reveal__title"><?php echo _($module_available . '_title');?></h5>	
+            <h5 class="text-center reveal__title"><?php echo dgettext($module_available, $module_available . '_title');?></h5>
 <?php 	
-	include('../modules/' . $module_available . '/backend/template.php');
+	textdomain($module_available);
+    include('../modules/' . $module_available . '/backend/template.php');
+    textdomain('config');
 ?>
 
 </div>
@@ -348,8 +340,6 @@ foreach ($modules_available AS $module_available) {
 
     // Generate localized strings for JS output.
     <?php
-    setGetTextDomain(GLANCR_ROOT ."/locale");
-
     echo "var LOCALE = " . json_encode(
             [
                 "deleteSuccess" => _("module deleted"),
