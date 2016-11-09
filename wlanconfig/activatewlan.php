@@ -13,13 +13,9 @@ setConfigValue('email', '');
 
 $connectionType = getConfigValue('connectionType');
 
-if($connectionType == 'wlan') {
-	$ssid = getConfigValue('wlanName');
-	$pass = getConfigValue('wlanPass');
-	exec('sudo /home/pi/activatewlan.sh ' . escapeshellarg($ssid) . ' ' . escapeshellarg($pass), $status);
-} else {
-	$status[0] = 1;
-}
+$ssid = getConfigValue('wlanName');
+$pass = getConfigValue('wlanPass');
+exec('sudo /home/pi/activatewlan.sh ' . escapeshellarg($ssid) . ' ' . escapeshellarg($pass), $status);
 
 if(!$status[0]) {
 	echo " failed";

@@ -2,7 +2,7 @@
 include('../config/glancrConfig.php');
 
 $language = getConfigValue('language');
-putenv("LANG=$language");
+ putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
 setGetTextDomain(GLANCR_ROOT ."/locale");
@@ -130,8 +130,14 @@ if($con[0] == 'eth') {
 					      <optgroup label="<?php echo _('choose wlan');?>">
 					      <?php 
 					      $wlans = file('../wlans.txt');
-				//	      $wlanInRange = false;
+ 				//	      $wlanInRange = false;
+					      $wlansListed = [];
 					      foreach($wlans as $wlan) {
+						if(in_array($wlan, $wlansListed)) {
+							break;
+						}
+						$wlansListed[] = $wlan;
+
 					      	if(trim($wlan) == trim($mywlan[1])) {
 					      		echo "<option selected>$wlan</option>\n";
 					//      		$wlanInRange = true;
@@ -143,6 +149,7 @@ if($con[0] == 'eth') {
 					      ?>
 					      </optgroup>
 				 	  </select>
+					<a href="#" id="rescan">rescan</a><br/>
 				 	  <input type="text" name="invisibleSsid"  style="display: <?php echo $invisibleStyle;?>" id="invisibleSsid" value="<?php echo $mywlan[1];?>" placeholder="<?php echo _('invisible ssid');?>" autocorrect="off">
 				 	 <input type="text" name="pass" id="password" value="<?php if(isset($mywlan[2])) echo $mywlan[2];?>" placeholder="<?php echo _('input password');?>" autocorrect="off" autocomplete="current-password">
 			 	 </div>
@@ -182,6 +189,24 @@ $('input:radio[name=invisibleWlan]').change(function() {
 	$('#ssid').toggle('fast');
 	$('#invisibleSsid').toggle('fast');
 })
+$('#rescan').click(function() {
+	$.ajax('rescan.php').done(function(wlans) {
+		wlan = wlans.split(" ");
+		wlanSelect = "";
+		wlansListed = [];
+		$.each(wlan, function(key, value) {
+			if(wlansListed.indexOf(value) == -1 && value.length) {
+				wlansListed.push(value);
+				if('<?php echo $mywlan[1];?>' == value) {
+					wlanSelect += '<option selected>' + value + "</option>\n";
+				} else {
+					wlanSelect += "<option>" + value + "</option>\n"; 
+				}
+			}
+		});
+		$('#ssid > optgroup').html(wlanSelect);
+	});
+});
 
 $(document).mousedown(function() {
 	$('#languageMenu').hide();
