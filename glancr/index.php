@@ -19,7 +19,7 @@ $languageShort = $langParts[0];
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain(GLANCR_ROOT ."/locale");
+setGetTextDomain('config', GLANCR_ROOT ."/locale");
 
 
 $modules_content = scandir(GLANCR_ROOT .'/modules');
@@ -38,7 +38,7 @@ foreach ($modules_enabled as $module_enabled) {
 		if(trim($module) == '' || !in_array(trim($module), $modules_available)) {
 			echo "<section class=\"module__" . $width. "width placeholdermodule\">\n";
 		} else {
-			setGetTextDomain(GLANCR_ROOT ."/modules/" . trim($module) . "/locale");
+			setGetTextDomain(trim($module), GLANCR_ROOT ."/modules/" . trim($module) . "/locale");
 			echo "<section class=\"module__" . $width. "width " . trim($module) . "module\">\n";
 			echo "<link rel=\"stylesheet\" href=\"../modules/" . trim($module) . "/frontend/styles.css\">\n";
 			echo "<script>";

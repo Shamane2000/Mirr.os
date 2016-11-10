@@ -6,7 +6,7 @@ $language = getConfigValue('language');
 putenv("LANG=$language");
 setlocale(LC_ALL, $language . '.utf8');
 
-setGetTextDomain($basedir ."/locale");
+setGetTextDomain('config', GLANCR_ROOT ."/locale");
 ?>
 <!DOCTYPE html>
 <html>

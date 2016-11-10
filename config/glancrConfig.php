@@ -32,10 +32,10 @@ function setConfigValue($key, $value) {
 	$conn->query("INSERT INTO configuration (`key`, `value`) VALUES ('" . $key . "', '" . $value . "') ON DUPLICATE KEY UPDATE value = '" . $value . "'");
 }
 
-function setGetTextDomain($directory) {
-	bindtextdomain('config', $directory);
-	textdomain('config');
-	bind_textdomain_codeset('config', 'UTF-8');
+function setGetTextDomain($domain, $directory) {
+	bindtextdomain($domain, $directory);
+	textdomain($domain);
+	bind_textdomain_codeset($domain, 'UTF-8');
 }
 
 function getSystemInfo() {
