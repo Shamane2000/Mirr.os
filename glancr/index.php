@@ -72,7 +72,7 @@ setInterval(function() {
 		url: "../wlanconfig/getStatus.php",
 		timeout: 10000
 	}).done(function( status ) {
-		netStatusStatusReceived = true;
+		netStatusReceived = true;
 		if(status != 1) {
 			location.href = "../nonet.php";
 		}
