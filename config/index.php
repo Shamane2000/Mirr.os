@@ -261,7 +261,9 @@ for($i = 0; $i < 6; $i++) {
                         	
  <?php 
  foreach ($modules_available AS $module_available) { 
-     $module_version = json_decode(file_get_contents(GLANCR_ROOT ."/modules/$module_available/info.json"))->module->version;
+ 	 $info_json = json_decode(file_get_contents(GLANCR_ROOT ."/modules/$module_available/info.json"));
+     $module_version = $info_json->module->version;
+     $module_creator = $info_json->creator->name;
  ?>           
                 <section class="column module-<?php echo $module_available;?> flex-row">
                     <div class="modulepicker__choosebox">
@@ -271,7 +273,7 @@ for($i = 0; $i < 6; $i++) {
                                 <img width="100" height="100" src="../modules/<?php echo $module_available;?>/assets/icon.svg" alt="logo" />
                             </div>
                             <div class="small-9 columns">
-                                <h6><?php echo dgettext($module_available, $module_available . '_title');?><span class="modulepicker__version">(<?php echo $module_version; ?>)</span></h6>
+                                <h6><?php echo dgettext($module_available, $module_available . '_title');?><span class="modulepicker__version">(<?php echo $module_version; ?> - <?php echo $module_creator; ?>)</span></h6>
                                 <p><?php echo dgettext($module_available, $module_available . '_description');?></p>
 
                             </div>
